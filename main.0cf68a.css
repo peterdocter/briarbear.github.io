@@ -993,13 +993,14 @@ body {
 	background: url(./img/scrollbar_arrow.png) no-repeat -30px -18px
 }
 
+/*代码字体*/
 .article-entry .highlight,.article-entry pre {
 	background: #272822;
 	margin: 10px 0;
 	padding: 10px;
 	overflow: auto;
 	color: #fff;
-	font-size: .9em;
+	font-size: 1em;
 	line-height: 22.400000000000002px
 }
 
@@ -2235,9 +2236,9 @@ pre .css~* .id,pre .id {
 	content: counter(item) ".";
 	margin-right: 10px
 }
-
+/*二级 - 字体大小*/
 .article-entry ol,.article-entry ul {
-	font-size: 14px;
+	font-size: medium;
 	margin: 10px 0
 }
 

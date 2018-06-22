@@ -176,6 +176,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Hexo-GitPage-Gitments-yilia博客搭建手记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/">Hexo+GitPage+Gitments+yilia博客搭建手记</a>
+    </h1>
+  
+
+        
+        <a href="2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/" class="archive-article-date">
+  	<time datetime="2018-06-22T06:58:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<blockquote>
+<p>说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用<code>SpringBoot</code>搭建了个人博客站点, <a href="www.val1ant.xin">博客预览</a> . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.</p>
+</blockquote>
+<h2 id="1-主要步骤"><a href="#1-主要步骤" class="headerlink" title="1.  主要步骤"></a>1.  主要步骤</h2><ul>
+<li>安装<code>Git</code>、 <code>Node.js</code>(本文示例为Windows平台)</li>
+<li>创建<code>Github</code>仓库,开启<code>GitPage</code></li>
+<li>安装、使用<code>Hexo</code>,更换主题</li>
+<li>图床、 <code>Markdown编辑器</code></li>
+<li>多端同步，<code>Gitment</code>评论等其他问题</li>
+</ul>
+<hr>
+<h2 id="2-安装Git、Node-js"><a href="#2-安装Git、Node-js" class="headerlink" title="2. 安装Git、Node.js"></a>2. 安装Git、Node.js</h2><ul>
+<li>安装<code>Git</code>，本文就不详述步骤，<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">具体可参考-廖雪峰Git教程</a></li>
+<li>安装<code>Node.js</code>，<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">下载网站</a>，笔者下载的是<code>LTS-Windows64位 5.6.0</code>安装版本</li>
+<li>安装时注意保持勾选 <code>add to path</code>，任意目录右键 <code>Git Bash Here</code>，输入 <code>npm -v</code>，检验安装是否成功，显示版本号，则表示正常</li>
+</ul>
+<hr>
+<h2 id="3-创建GitHub仓库，设为GitPages"><a href="#3-创建GitHub仓库，设为GitPages" class="headerlink" title="3. 创建GitHub仓库，设为GitPages"></a>3. 创建GitHub仓库，设为GitPages</h2><ul>
+<li><p>创建一个仓库，命名为 <code>用户名.github.io</code>,如 <code>briarbear.github.io</code></p>
+</li>
+<li><p>这样的命名即为开启 <code>GitPages</code>，点开仓库的<code>setting</code>，可以看到<code>GitHub Pages</code>说明</p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201806221530_904.png" alt=""></p>
+</li>
+<li><p>则博客站点域名即为 <code>用户名.github.io</code></p>
+</li>
+</ul>
+<hr>
+<h2 id="4-安装Hexo"><a href="#4-安装Hexo" class="headerlink" title="4. 安装Hexo"></a>4. 安装Hexo</h2><ul>
+<li>安装教程可参看 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a>，中文版，详尽易懂 </li>
+<li><p>主要步骤为 </p>
+<ul>
+<li>安装： <code>npm install -g hexo-cli</code>  </li>
+<li><p>初始化：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo init &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> cd &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> npm install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置：重点配置<code>deploy</code> ，使用<code>Git</code>同步方式与<code>GItHub</code>同步，具体详见 <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">官方说明</a></p>
+<p>如笔者的配置，完整的详细配置，可见文末本博客站点的开源：</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repo:</span> <span class="string">git@github.com:briarbear/briarbear.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>安装<code>Git</code>插件：<code>npm install hexo-deployer-git --save</code></p>
+<ul>
+<li>启动：</li>
+</ul>
+</li>
+<li><p>此时就可以依次输入命令； <code>hexo clean</code>， <code>hexo generate</code>, <code>hexo server</code></p>
+</li>
+<li>即本地启动完成：在浏览器输入：<code>http://localhost:4000</code>,即可以看到初始效果</li>
+</ul>
+<hr>
+<h2 id="5-使用Hexo"><a href="#5-使用Hexo" class="headerlink" title="5. 使用Hexo"></a>5. 使用Hexo</h2><ul>
+<li>常用命令:</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">hexo</span> <span class="string">init</span> <span class="string">[folder]</span> <span class="comment"># 新建一个网站。如果没有设置 folder ，Hexo 默认在目前的文件夹建立网站。</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">new</span> <span class="string">[layout]</span> <span class="string">&lt;title&gt;</span></span><br><span class="line"><span class="comment">#新建一篇文章。如果没有设置 layout 的话，默认使用 _config.yml 中的 default_layout 参数代替。如果标题包含空格的话，请使用引号括起来。</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">generate</span>  <span class="comment"># 生成静态文件。-d 文件生成后立即部署网站 -w 监视文件变动 </span></span><br><span class="line"><span class="string">hexo</span> <span class="string">g</span> <span class="comment">#简写</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">publish</span> <span class="string">[layout]</span> <span class="string">&lt;filename&gt;</span>  <span class="comment"># 发表草稿。</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">server</span></span><br><span class="line"><span class="comment"># 启动服务器。默认情况下，访问网址为： http://localhost:4000/。</span></span><br><span class="line"><span class="comment"># -p 重设端口 -s 只使用静态文件 -l 启动日志记录</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">deploy</span>  <span class="comment"># 部署网站。-g 部署之前预先生成静态文件</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">d</span> <span class="comment">#简写</span></span><br><span class="line"></span><br><span class="line"><span class="string">hexo</span> <span class="string">clean</span>  <span class="comment">#清除缓存文件 (db.json) 和已生成的静态文件 (public)。</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-使用主题"><a href="#6-使用主题" class="headerlink" title="6. 使用主题"></a>6. 使用主题</h2><blockquote>
+<p><code>hexo</code>官方提供了大量的 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">优秀主题</a>，如果选中某款主题，点击主题，移至页面底部，一般都可以看到主题的版权说明，点击即可以进入主题的<code>github</code>仓库，如选中第一个主题<code>A-RSnippet</code>，下图所示：</p>
+</blockquote>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201806221936_116.png" alt=""></p>
+<ul>
+<li>笔者使用的 <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>主题</li>
+<li>在<code>hexo</code>的目录中，主题文件位于 <code>./themes</code>, 主题的主要流程<ul>
+<li>在主题目录中，<code>git clone 主题仓库</code></li>
+<li>修改主题的配置文件：<code>_config.yml</code></li>
+</ul>
+</li>
+<li>具体使用流程，可参考一个 <a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilla主题使用教程</a> </li>
+<li>如果喜欢笔者的主题,已做了一些修改，可以在文本的<code>github</code>仓库中<code>clone</code>下来，<code>./themes/yilla</code></li>
+</ul>
+<hr>
+<h2 id="7-Markdown编辑器与图床"><a href="#7-Markdown编辑器与图床" class="headerlink" title="7. Markdown编辑器与图床"></a>7. Markdown编辑器与图床</h2><ul>
+<li>笔者使用的 <a href="https://typora.io/" target="_blank" rel="noopener">Typora</a>编辑器，一款非常优秀的markdown编辑器，满足你对markdown编辑器所有的幻想，（即时预览，仅此一家）</li>
+<li>在<code>hexo</code>中，使用<code>hexo new</code>新建文章后，再去<code>./source/_posts</code>目录下找到目标文档，使用<code>Typora</code>编辑器编辑</li>
+<li>而使用Markdown编辑器，我们经常会遇到图片问题，这里提供两种处理方案<ul>
+<li>第一种方案：【相对路径】在<code>hexo</code>配置文件中，开启 <code>post_asset_folder: true</code>，新建文件会生成文件对应的文件夹，在markdown中可以使用相对路径来引用图片</li>
+<li>第二种方案：【绝对路径】笔者使用的方案，使用在线的图床，这样可以更好的方便使用markdown文件，在任意地方打开都能正确的渲染，而使用绝对路径，就得使用图床网站来保存图片</li>
+</ul>
+</li>
+<li>关于图床<ul>
+<li>推荐 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a>，实名认证，送免费存储空间，存储图片够用</li>
+</ul>
+</li>
+<li>但是，使用图床，如果我们每次使用一个图片，都要先上传到图床，再复制外链，再粘贴 ，这样效率就低的可怕，有没有一种工具，我复制一张图片，后台自动上传到图床，然后返回外链至剪切板，这样在markdown编辑器中直接就可以使用呢？</li>
+<li>有，当然有！！！！Mac下有付费的应用，Windows下推荐 <a href="https://github.com/jiwenxing/qimage-win" target="_blank" rel="noopener">qImage</a>，使用方法参看具体链接</li>
+<li>最终效果：使用 <code>Alt + S</code> 截图（推荐截图贴图软件 <a href="https://zh.snipaste.com/" target="_blank" rel="noopener">snipaste</a> ），复制图片，在typora中使用快捷键 <code>Ctrl + Alt + V</code>，则直接生成图片</li>
+</ul>
+<hr>
+<h2 id="8-多端同步与Gitment"><a href="#8-多端同步与Gitment" class="headerlink" title="8. 多端同步与Gitment"></a>8. 多端同步与Gitment</h2><ul>
+<li><p>在<code>hexo</code>中，通过<code>git</code>连接<code>github</code>仓库，它同步的文件实际上仅为经过<code>hexo</code>生成的静态文件，那么怎样将源文件在多端同步，这样是可以在多台设备都可以编辑博客，解决思路：<code>Git 分支</code></p>
+</li>
+<li><p>详细的解决方案，<a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">知乎：使用hexo，如果换了电脑怎么更新博客？</a></p>
+</li>
+<li><p>到此为止，静态博客基本可用，但由于是静态网站，无法评论，解决思路是结合<code>Gitments</code>来解决，同时，<code>yilia</code>主题也提供了多种评论方式，具体可参看 <a href="https://github.com/litten/hexo-theme-yilia/wiki/%E5%A4%9A%E8%AF%B4%E3%80%81%E7%95%85%E8%A8%80%E3%80%81%E7%BD%91%E6%98%93%E4%BA%91%E8%B7%9F%E5%B8%96%E3%80%81Disqus%E8%AF%84%E8%AE%BA%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">wiki</a></p>
+</li>
+<li><p>而使用<code>Gitments</code>，<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">使用教程</a></p>
+</li>
+<li><p>笔者的配置文件</p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201806221914_399.png" alt=""></p>
+</li>
+</ul>
+<hr>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">GitHub+Hexo 搭建个人网站详细教程</a></li>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo中文文档</a></li>
+<li><a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">Gitment：使用 GitHub Issues 搭建评论系统</a></li>
+<li><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">知乎：使用hexo，如果换了电脑怎么更新博客？</a></li>
+<li><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">一个简洁优雅的hexo主题 yilia</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -258,125 +454,6 @@
 
 
   
-    <article id="post-十大排序算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/06/21/十大排序算法/">十大排序算法总结(Java版)</a>
-    </h1>
-  
-
-        
-        <a href="2018/06/21/十大排序算法/" class="archive-article-date">
-  	<time datetime="2018-06-21T11:19:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<hr>
-<h2 id="1-排序算法说明"><a href="#1-排序算法说明" class="headerlink" title="1. 排序算法说明"></a>1. 排序算法说明</h2><h3 id="1-1-排序的定义"><a href="#1-1-排序的定义" class="headerlink" title="1.1 排序的定义"></a>1.1 排序的定义</h3><ul>
-<li>对一序列对象根据某个关键字进行排序。</li>
-</ul>
-<h3 id="1-2-术语说明"><a href="#1-2-术语说明" class="headerlink" title="1.2 术语说明"></a>1.2 术语说明</h3><ul>
-<li><strong>稳定</strong>：如果a原本在b前面，而a=b，排序之后a仍然在b的前面；</li>
-<li><strong>不稳定</strong>：如果a原本在b的前面，而a=b，排序之后a可能会出现在b的后面；</li>
-<li><strong>内排序</strong>：所有排序操作都在内存中完成；</li>
-<li><strong>外排序</strong>：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行；</li>
-</ul>
-<p><strong>时间复杂度</strong>： 一个算法执行所耗费的时间。<br><strong>空间复杂度</strong>：运行完一个程序所需内存的大小。</p>
-<h3 id="1-3-算法总结"><a href="#1-3-算法总结" class="headerlink" title="1.3 算法总结"></a>1.3 算法总结</h3><p><img src="http://p7dzmubvx.bkt.clouddn.com/201805221642_154.png" alt=""></p>
-<ul>
-<li>图片中名词解释<ul>
-<li>n: 数据规模</li>
-<li>k: “桶”的个数</li>
-<li>In-place: 占用常数内存，不占用额外内存</li>
-<li>Out-place: 占用额外内存</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-4-算法分类"><a href="#1-4-算法分类" class="headerlink" title="1.4 算法分类"></a>1.4 算法分类</h3><p><img src="http://p7dzmubvx.bkt.clouddn.com/201805221646_314.png" alt=""></p>
-<h3 id="1-5-比较与非比较的区别"><a href="#1-5-比较与非比较的区别" class="headerlink" title="1.5 比较与非比较的区别"></a>1.5 比较与非比较的区别</h3><ul>
-<li>常见的<strong>快速排序、归并排序、堆排序、冒泡排序</strong>等属于<strong>比较排序</strong>。<strong>在排序的最终结果里，元素之间的次序依赖于它们之间的比较。每个数都必须和其他数进行比较，才能确定自己的位置。</strong></li>
-<li>在<strong>冒泡排序</strong>之类的排序中，问题规模为n，又因为需要比较n次，所以平均时间复杂度为O(n²)。在<strong>归并排序、快速排序</strong>之类的排序中，问题规模通过<strong>分治法</strong>消减为logN次，所以时间复杂度平均<strong>O(nlogn)</strong>。</li>
-<li><p>比较排序的优势是，适用于各种规模的数据，也不在乎数据的分布，都能进行排序。可以说，<strong>比较排序适用于一切需要排序的情况。</strong></p>
-</li>
-<li><p><strong>计数排序、基数排序、桶排序</strong>则属于<strong>非比较排序</strong>。非比较排序是通过确定每个元素之前，应该有多少个元素来排序。针对数组arr，计算arr[i]之前有多少个元素，则唯一确定了arr[i]在排序后数组中的位置。<br>非比较排序只要确定每个元素之前的已有的元素个数即可，所有一次遍历即可解决。算法时间复杂度<strong>O(n)</strong>。</p>
-</li>
-<li><strong>非比较排序时间复杂度底，但由于非比较排序需要占用空间来确定唯一位置。所以对数据规模和数据分布有一定的要求。</strong></li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
-<li><a href="https://www.cnblogs.com/guoyaohua/p/8600214.html" target="_blank" rel="noopener">https://www.cnblogs.com/guoyaohua/p/8600214.html</a></li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/06/21/十大排序算法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-about" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -415,99 +492,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="2018/06/21/about/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="2018/06/21/test/">test</a>
-    </h1>
-  
-
-        
-        <a href="2018/06/21/test/" class="archive-article-date">
-  	<time datetime="2018-06-21T02:07:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><blockquote>
-<p>引用</p>
-</blockquote>
-<hr>
-<ul>
-<li>测试</li>
-</ul>
-<p>—分隔符—</p>
-<p>册数==</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/test//" class="article-tag-list-link color5">test</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="2018/06/21/test/">展开全文 >></a>
         </p>
       
 
@@ -626,11 +610,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
             
             <div class="clearfix"></div>
