@@ -10,13 +10,13 @@ menu:
 
 # SubNav
 subnav:
-  github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
+  github: "https://github.com/briarbear"
+  # weibo: "#"
+  rss: "http://www.val1ant.xin"
+  # zhihu: ""
   #qq: "#"
   #weixin: "#"
-  #jianshu: "#"
+  jianshu: "https://www.jianshu.com/u/eaf90771dce3"
   #douban: "#"
   #segmentfault: "#"
   #bilibili: "#"
