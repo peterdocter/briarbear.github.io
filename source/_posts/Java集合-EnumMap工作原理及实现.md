@@ -1,6 +1,6 @@
 ---
 layout: java
-title: EnumMap工作原理及实现
+title: Java集合-EnumMap工作原理及实现
 date: 2018-06-25 10:02:46
 toc: true
 tags: 
@@ -13,7 +13,7 @@ categories: Java
 
 ----
 
-### 1.概述
+### 1. 概述
 
 > A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly, when the map is created. Enum maps are represented internally as arrays. This representation is extremely compact and efficient.
 

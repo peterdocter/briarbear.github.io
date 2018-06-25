@@ -4,7 +4,7 @@
 
 # Site
 title: briarbear | 熊大
-subtitle: Coding---@熊大
+subtitle:   ----^_^----  
 description: Java程序员成长之路
 keywords: Java
 author:  Briar·bear
@@ -36,7 +36,7 @@ external_link: true # Open external links in new tab
 filename_case: 0
 multi_thread: true
 render_drafts: false
-post_asset_folder: true
+post_asset_folder: false
 relative_link: false
 future: true
 highlight:
