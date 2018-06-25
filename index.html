@@ -172,20 +172,20 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="java-EnumMap工作原理及实现" class="article article-type-java  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java集合-HashMap工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/EnumMap工作原理及实现/">EnumMap工作原理及实现</a>
+      <a class="article-title" href="/2018/06/25/Java集合-HashMap工作原理及实现/">Java集合-HashMap工作原理及实现</a>
     </h1>
   
 
         
-        <a href="/2018/06/25/EnumMap工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T02:02:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+        <a href="/2018/06/25/Java集合-HashMap工作原理及实现/" class="archive-article-date">
+  	<time datetime="2018-06-25T06:24:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
 </a>
         
       </header>
@@ -198,15 +198,21 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>【转载】 <a href="http://yikun.github.io/2015/04/24/Java-EnumMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a> - （部分修改与补充）</p>
+<p>【转载】<a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接 </a> - （部分修改与补充）</p>
 </blockquote>
-<hr>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><blockquote>
-<p>A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly, when the map is created. Enum maps are represented internally as arrays. This representation is extremely compact and efficient.</p>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><hr>
+<p>从本文你可以学习到：</p>
+<blockquote>
+<ol>
+<li>什么时候会使用<code>HashMap</code>？他有什么特点？</li>
+<li>你知道<code>HashMap</code>的工作原理吗？</li>
+<li>你知道<code>get</code>和put的原理吗？<code>equals()</code>和<code>hashCode()</code>的都有什么作用？</li>
+<li>你知道<code>hash</code>的实现吗？为什么要这样实现？</li>
+<li>如果<code>HashMap</code>的大小超过了负载因子<code>(load factor)</code>定义的容量，怎么办？</li>
+</ol>
 </blockquote>
-<p><code>EnumMap</code>是是一种键为枚举类型的特殊的<code>Map</code>实现。所有的<code>Key</code>也必须是一种枚举类型，<code>EnumMap</code>是使用数组来实现的。（<em>两个数组，一个数组<code>keyUniverse</code>存储<code>key</code>，另一个数组<code>vals</code>存储val，两个数组通过下标对应起来</em>）</p>
         
-          <a class="article-more-a" href="/2018/06/25/EnumMap工作原理及实现/#more">more >></a>
+          <a class="article-more-a" href="/2018/06/25/Java集合-HashMap工作原理及实现/#more">more >></a>
         
       
 
@@ -244,9 +250,104 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/25/EnumMap工作原理及实现/">展开全文 >></a>
-        </p>
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="java-Java集合-EnumMap工作原理及实现" class="article article-type-java  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/25/Java集合-EnumMap工作原理及实现/">Java集合-EnumMap工作原理及实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/25/Java集合-EnumMap工作原理及实现/" class="archive-article-date">
+  	<time datetime="2018-06-25T02:02:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>【转载】 <a href="http://yikun.github.io/2015/04/24/Java-EnumMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a> - （部分修改与补充）</p>
+</blockquote>
+<hr>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><blockquote>
+<p>A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly, when the map is created. Enum maps are represented internally as arrays. This representation is extremely compact and efficient.</p>
+</blockquote>
+<p><code>EnumMap</code>是是一种键为枚举类型的特殊的<code>Map</code>实现。所有的<code>Key</code>也必须是一种枚举类型，<code>EnumMap</code>是使用数组来实现的。（<em>两个数组，一个数组<code>keyUniverse</code>存储<code>key</code>，另一个数组<code>vals</code>存储val，两个数组通过下标对应起来</em>）</p>
+        
+          <a class="article-more-a" href="/2018/06/25/Java集合-EnumMap工作原理及实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
       
 
       
@@ -302,7 +403,7 @@
       
         <hr>
 <blockquote>
-<p>说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用<code>SpringBoot</code>搭建了个人博客站点, <a href="www.val1ant.xin">博客预览</a> . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.</p>
+<p>说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用<code>SpringBoot</code>搭建了个人博客站点, <a href="http://www.val1ant.xin" target="_blank" rel="noopener">博客预览</a> . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.</p>
 </blockquote>
 <h2 id="1-主要步骤"><a href="#1-主要步骤" class="headerlink" title="1.  主要步骤"></a>1.  主要步骤</h2><ul>
 <li>安装<code>Git</code>、 <code>Node.js</code>(本文示例为Windows平台)</li>
@@ -345,97 +446,6 @@
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/22/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/22/hello-world/" class="archive-article-date">
-  	<time datetime="2018-06-22T06:39:31.090Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/test//" class="article-tag-list-link color5">test</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/22/hello-world/">展开全文 >></a>
-        </p>
       
 
       
@@ -504,10 +514,6 @@
       
       
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/21/about/">展开全文 >></a>
-        </p>
       
 
       
@@ -625,15 +631,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Map</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
             
             <div class="clearfix"></div>

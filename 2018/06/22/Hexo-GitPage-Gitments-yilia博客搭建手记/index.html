@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221530_904.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221936_116.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221914_399.png">
-<meta property="og:updated_time" content="2018-06-25T04:49:23.187Z">
+<meta property="og:updated_time" content="2018-06-25T06:42:09.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+GitPage+Gitments+yilia博客搭建手记">
 <meta name="twitter:description" content="说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用SpringBoot搭建了个人博客站点, 博客预览 . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.  1.">
@@ -196,13 +196,37 @@
     
       <!-- 目录内容 -->
       
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+                <span class="btn-bg"></span>
+                <span class="btn-text">文章导航</span>
+                </p>
+        <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-主要步骤"><span class="toc-number">1.</span> <span class="toc-text">1.  主要步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装Git、Node-js"><span class="toc-number">2.</span> <span class="toc-text">2. 安装Git、Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-创建GitHub仓库，设为GitPages"><span class="toc-number">3.</span> <span class="toc-text">3. 创建GitHub仓库，设为GitPages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装Hexo"><span class="toc-number">4.</span> <span class="toc-text">4. 安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-使用Hexo"><span class="toc-number">5.</span> <span class="toc-text">5. 使用Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-使用主题"><span class="toc-number">6.</span> <span class="toc-text">6. 使用主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Markdown编辑器与图床"><span class="toc-number">7.</span> <span class="toc-text">7. Markdown编辑器与图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-多端同步与Gitment"><span class="toc-number">8.</span> <span class="toc-text">8. 多端同步与Gitment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">9.</span> <span class="toc-text">相关链接</span></a></li></ol>
+               </div>
+         <script type="text/javascript">
+        function showToc(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:block");
+          show_toc_btn.setAttribute("style","display:none");
+          };
+        function showBtn(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:none");
+          show_toc_btn.setAttribute("style","display:block");
+          };
+         </script>
+            
       <!-- 目录内容结束 -->    
 
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
 <blockquote>
-<p>说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用<code>SpringBoot</code>搭建了个人博客站点, <a href="www.val1ant.xin">博客预览</a> . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.</p>
+<p>说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用<code>SpringBoot</code>搭建了个人博客站点, <a href="http://www.val1ant.xin" target="_blank" rel="noopener">博客预览</a> . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.</p>
 </blockquote>
 <h2 id="1-主要步骤"><a href="#1-主要步骤" class="headerlink" title="1.  主要步骤"></a>1.  主要步骤</h2><ul>
 <li>安装<code>Git</code>、 <code>Node.js</code>(本文示例为Windows平台)</li>
@@ -235,7 +259,7 @@
 <ul>
 <li>安装： <code>npm install -g hexo-cli</code>  </li>
 <li><p>初始化：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init &lt;folder&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;folder&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo init &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> cd &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> npm install</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置：重点配置<code>deploy</code> ，使用<code>Git</code>同步方式与<code>GItHub</code>同步，具体详见 <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">官方说明</a></p>
 <p>如笔者的配置，完整的详细配置，可见文末本博客站点的开源：</p>
@@ -433,18 +457,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/25/EnumMap工作原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/06/25/Java集合-EnumMap工作原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          EnumMap工作原理及实现
+          Java集合-EnumMap工作原理及实现
         
       </div>
     </a>
   
   
-    <a href="/2018/06/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2018/06/21/about/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">about</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -463,6 +487,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-主要步骤"><span class="toc-number">1.</span> <span class="toc-text">1.  主要步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-安装Git、Node-js"><span class="toc-number">2.</span> <span class="toc-text">2. 安装Git、Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-创建GitHub仓库，设为GitPages"><span class="toc-number">3.</span> <span class="toc-text">3. 创建GitHub仓库，设为GitPages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装Hexo"><span class="toc-number">4.</span> <span class="toc-text">4. 安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-使用Hexo"><span class="toc-number">5.</span> <span class="toc-text">5. 使用Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-使用主题"><span class="toc-number">6.</span> <span class="toc-text">6. 使用主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Markdown编辑器与图床"><span class="toc-number">7.</span> <span class="toc-text">7. Markdown编辑器与图床</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-多端同步与Gitment"><span class="toc-number">8.</span> <span class="toc-text">8. 多端同步与Gitment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">9.</span> <span class="toc-text">相关链接</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -582,15 +619,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Map</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
             
             <div class="clearfix"></div>
