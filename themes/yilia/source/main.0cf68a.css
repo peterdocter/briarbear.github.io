@@ -2960,7 +2960,8 @@ pre .css~* .id,pre .id {
 	}
 
 	.mid-col {
-		left: 0
+		left: 0;
+		width:auto;
 	}
 
 	#header .header-nav,.mid-col {
