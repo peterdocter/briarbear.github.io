@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221530_904.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221936_116.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806221914_399.png">
-<meta property="og:updated_time" content="2018-06-22T12:02:42.450Z">
+<meta property="og:updated_time" content="2018-06-25T04:46:03.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+GitPage+Gitments+yilia博客搭建手记">
 <meta name="twitter:description" content="说明: 经过两天的折腾, 也算把这个事情搞定了,顺手写下这边手记.笔者之前已经使用SpringBoot搭建了个人博客站点, 博客预览 . 完整代码已开源,可见博客站点的说明页. 而之所以又着手搭建这个站点,主要考虑到,那个服务器租期为一年,后期维护麻烦,为减少成本,打算慢慢迁移至此. 这边随笔主要记录使用Hexo+GitHub搭建博客的流程,希望对您有所帮助,喜欢点个Star,谢谢.  1.">
@@ -64,15 +64,15 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="../../../../index.html">主页</a></li>
+				<li><a href="/">主页</a></li>
 	        
-				<li><a href="../../../../categories/随笔/">随笔</a></li>
+				<li><a href="/categories/随笔/">随笔</a></li>
 	        
-				<li><a href="../../../../categories/Java">Java</a></li>
+				<li><a href="/categories/Java/">Java</a></li>
 	        
-				<li><a href="../../../../archives">归档</a></li>
+				<li><a href="/archives">归档</a></li>
 	        
-				<li><a href="../../../../2018/06/21/about">关于我</a></li>
+				<li><a href="/2018/06/21/about">关于我</a></li>
 	        
 			</ul>
 		</nav>
@@ -152,15 +152,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="../../../../index.html">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="../../../../categories/随笔/">随笔</a></li>
+					<li style="width: 20%"><a href="/categories/随笔/">随笔</a></li>
 		        
-					<li style="width: 20%"><a href="../../../../categories/Java">Java</a></li>
+					<li style="width: 20%"><a href="/categories/Java/">Java</a></li>
 		        
-					<li style="width: 20%"><a href="../../../../archives">归档</a></li>
+					<li style="width: 20%"><a href="/archives">归档</a></li>
 		        
-					<li style="width: 20%"><a href="../../../../2018/06/21/about">关于我</a></li>
+					<li style="width: 20%"><a href="/2018/06/21/about">关于我</a></li>
 		        
 				</ul>
 			</nav>
@@ -187,12 +187,17 @@
   
 
         
-        <a href="" class="archive-article-date">
+        <a href="/2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/" class="archive-article-date">
   	<time datetime="2018-06-22T06:58:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-22</time>
 </a>
         
       </header>
     
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
@@ -206,6 +211,7 @@
 <li>图床、 <code>Markdown编辑器</code></li>
 <li>多端同步，<code>Gitment</code>评论等其他问题</li>
 </ul>
+<a id="more"></a>
 <hr>
 <h2 id="2-安装Git、Node-js"><a href="#2-安装Git、Node-js" class="headerlink" title="2. 安装Git、Node.js"></a>2. 安装Git、Node.js</h2><ul>
 <li>安装<code>Git</code>，本文就不详述步骤，<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">具体可参考-廖雪峰Git教程</a></li>
@@ -229,7 +235,7 @@
 <ul>
 <li>安装： <code>npm install -g hexo-cli</code>  </li>
 <li><p>初始化：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init &lt;folder&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &lt;folder&gt;</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo init &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> cd &lt;folder&gt;</span><br><span class="line"><span class="meta">$</span> npm install</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>配置：重点配置<code>deploy</code> ，使用<code>Git</code>同步方式与<code>GItHub</code>同步，具体详见 <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">官方说明</a></p>
 <p>如笔者的配置，完整的详细配置，可见文末本博客站点的开源：</p>
@@ -427,8 +433,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/06/25/EnumMap工作原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          EnumMap工作原理及实现
+        
+      </div>
+    </a>
   
-    <a href="../hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2018/06/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Hello World</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -468,7 +483,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "https://briarbear.github.io",
+  id: "https://briarbear.github.io/2018/06/22/Hexo-GitPage-Gitments-yilia博客搭建手记/",
   owner: 'briarbear',
   repo: 'gitment',
   oauth: {
@@ -505,7 +520,7 @@ gitment.render('gitment-ctn')
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: false,
+		open_in_new: true,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
@@ -569,6 +584,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -620,6 +643,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://www.val1ant.xin" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>个人开源博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://yikun.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Yikun博客</a>
             </li>
           
         </ul>
