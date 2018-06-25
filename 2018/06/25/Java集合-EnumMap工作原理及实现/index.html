@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://briarbear.github.io">
   <title>Java集合-EnumMap工作原理及实现 | briarbear | 熊大</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="【转载】 原文链接 - （部分修改与补充）   1.概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly">
+  <meta name="description" content="【转载】 原文链接 - （部分修改与补充）   1. 概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitl">
 <meta name="keywords" content="Map,转载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合-EnumMap工作原理及实现">
 <meta property="og:url" content="https://briarbear.github.io/2018/06/25/Java集合-EnumMap工作原理及实现/index.html">
 <meta property="og:site_name" content="briarbear | 熊大">
-<meta property="og:description" content="【转载】 原文链接 - （部分修改与补充）   1.概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly">
+<meta property="og:description" content="【转载】 原文链接 - （部分修改与补充）   1. 概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitl">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806251030_826.png">
-<meta property="og:updated_time" content="2018-06-25T06:14:56.806Z">
+<meta property="og:updated_time" content="2018-06-25T06:46:01.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合-EnumMap工作原理及实现">
-<meta name="twitter:description" content="【转载】 原文链接 - （部分修改与补充）   1.概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly">
+<meta name="twitter:description" content="【转载】 原文链接 - （部分修改与补充）   1. 概述 A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitl">
 <meta name="twitter:image" content="http://p7dzmubvx.bkt.clouddn.com/201806251030_826.png">
   
     <link rel="alternative" href="/atom.xml" title="briarbear | 熊大" type="application/atom+xml">
@@ -56,7 +56,7 @@
 		  <h1 class="header-author"><a href="/">Briar·bear</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">Coding---@熊大</p>
+		<p class="header-subtitle">----^_^----</p>
 		
 
 		<nav class="header-menu">
@@ -118,7 +118,7 @@
 			  <h1 class="header-author js-header-author">Briar·bear</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Coding---@熊大<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>----^_^----<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -201,7 +201,7 @@
         <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-                 <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-put和get方法"><span class="toc-number">2.</span> <span class="toc-text">2. put和get方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-遍历"><span class="toc-number">3.</span> <span class="toc-text">3. 遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                 <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-put和get方法"><span class="toc-number">2.</span> <span class="toc-text">2. put和get方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-遍历"><span class="toc-number">3.</span> <span class="toc-text">3. 遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
                </div>
          <script type="text/javascript">
         function showToc(){
@@ -226,7 +226,7 @@
 <p>【转载】 <a href="http://yikun.github.io/2015/04/24/Java-EnumMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a> - （部分修改与补充）</p>
 </blockquote>
 <hr>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3><blockquote>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><blockquote>
 <p>A specialized Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly, when the map is created. Enum maps are represented internally as arrays. This representation is extremely compact and efficient.</p>
 </blockquote>
 <p><code>EnumMap</code>是是一种键为枚举类型的特殊的<code>Map</code>实现。所有的<code>Key</code>也必须是一种枚举类型，<code>EnumMap</code>是使用数组来实现的。（<em>两个数组，一个数组<code>keyUniverse</code>存储<code>key</code>，另一个数组<code>vals</code>存储val，两个数组通过下标对应起来</em>）</p>
@@ -404,7 +404,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-put和get方法"><span class="toc-number">2.</span> <span class="toc-text">2. put和get方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-遍历"><span class="toc-number">3.</span> <span class="toc-text">3. 遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-put和get方法"><span class="toc-number">2.</span> <span class="toc-text">2. put和get方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-遍历"><span class="toc-number">3.</span> <span class="toc-text">3. 遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -537,6 +537,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">List</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
             
             <div class="clearfix"></div>
