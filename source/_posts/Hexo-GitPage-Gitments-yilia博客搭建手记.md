@@ -18,6 +18,8 @@ categories: 随笔
 - 图床、 `Markdown编辑器`
 - 多端同步，`Gitment`评论等其他问题
 
+<!-- more -->
+
 ---
 
 ## 2. 安装Git、Node.js

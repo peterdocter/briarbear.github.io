@@ -3,9 +3,9 @@
 menu:
   主页: /
   随笔: /categories/随笔/
-  Java: /categories/Java
+  Java: /categories/Java/
   归档: /archives
-  关于我: /about
+  关于我: /2018/06/21/about
 
 
 # SubNav
@@ -40,10 +40,11 @@ root: /
 excerpt_link: more
 # 文章卡片右下角常驻链接，不需要请设置为false
 show_all_link: '展开全文'
+fancybox: true
 # 数学公式
 mathjax: false
 # 是否在新窗口打开链接
-open_in_new: false
+open_in_new: true
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
@@ -125,6 +126,6 @@ smart_menu:
 
 friends:
   个人开源博客: http://www.val1ant.xin
-
+  Yikun博客: http://yikun.github.io
 
 aboutme: 待更新
