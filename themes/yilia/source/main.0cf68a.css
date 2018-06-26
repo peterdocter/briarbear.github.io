@@ -1006,7 +1006,8 @@ body {
 	overflow: auto;
 	color: #fff;
 	font-size: 1em;
-	line-height: 22.400000000000002px
+	line-height: 22.400000000000002px;
+	font-family: Consolas,Source Code Pro,Monaco,Menlo,monospace
 }
 
 .article-entry .gist .gist-file .gist-data .line-numbers,.article-entry .highlight .gutter pre,.article-entry .highlight .gutter pre .line {
@@ -1014,7 +1015,9 @@ body {
 }
 
 .article-entry code,.article-entry pre {
-	font-family: Source Code Pro,Consolas,Monaco,Menlo,monospace
+	/*代码块字体*/
+	font-family: Consolas,Source Code Pro,Monaco,Menlo,monospace
+	/*font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;*/
 }
 
 .article-entry code {
@@ -1077,10 +1080,12 @@ body {
 .article-entry .highlight .gutter pre .line {
 	text-shadow: none
 }
-
+/*行代码格式*/
 .article-entry .highlight .line {
+	font-family: Source Code Pro,Consolas,Monaco,Menlo,monospace;
 	color: #fff;
 	min-height: 19px
+
 }
 
 .article-entry .gist {
@@ -1187,7 +1192,7 @@ pre .css~* .id,pre .id {
 	position: relative;
 	border-radius: 0 5px 5px 0;
 	margin: 5px 9px 5px 8px;
-	font-family: Menlo,Monaco,Andale Mono,lucida console,Courier New,monospace
+	font-family: lucida console,Menlo,Monaco,Andale Mono,Courier New,monospace
 }
 
 .tagcloud a:hover {
@@ -2161,7 +2166,8 @@ pre .css~* .id,pre .id {
 
 .article-inner h4 {
 	letter-spacing: .140625em;
-	text-transform: uppercase
+	/*text-transform: uppercase 大写*/
+	font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, 'Hiragino Sans GB', 'Microsoft Yahei', Arial, sans-serif
 }
 
 .article-inner h6 {
@@ -2301,7 +2307,7 @@ pre .css~* .id,pre .id {
 	color: #657b83;
 	border: 1px solid #ccc;
 	text-shadow: 0 1px #444;
-	font-family: Menlo,Monaco,Andale Mono,lucida console,Courier New,monospace
+	font-family: lucida console,Menlo,Monaco,Andale Mono,Courier New,monospace
 }
 
 .article-entry pre code {
@@ -2919,7 +2925,7 @@ pre .css~* .id,pre .id {
 
 #footer {
 	font-size: 12px;
-	font-family: Menlo,Monaco,Andale Mono,lucida console,Courier New,monospace;
+	font-family: lucida console,Menlo,Monaco,Andale Mono,Courier New,monospace;
 	text-shadow: 0 1px #fff;
 	position: absolute;
 	bottom: 30px;
