@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://briarbear.github.io">
-  <title>Java集合-HashSet工作原理及实现 | briarbear | 熊大</title>
+  <title>Java集合-PriorityQueue工作原理及实现 | briarbear | 熊大</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="【转载】 原文链接">
-<meta name="keywords" content="转载,Set">
+  <meta name="description" content="【转载】 原文链接  参考资料基于最小堆（小根堆）的topn算法基于堆实现的优先级队列：PriorityQueue 解决 Top K 问题Java优先队列（PriorityQueue）示例JDK源码研究PriorityQueue（优先队列）优先级队列：PriorityQueue">
+<meta name="keywords" content="Queue,转载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java集合-HashSet工作原理及实现">
-<meta property="og:url" content="https://briarbear.github.io/2018/06/25/Java集合-HashSet工作原理及实现/index.html">
+<meta property="og:title" content="Java集合-PriorityQueue工作原理及实现">
+<meta property="og:url" content="https://briarbear.github.io/2018/06/26/Java集合-PriorityQueue工作原理及实现/index.html">
 <meta property="og:site_name" content="briarbear | 熊大">
-<meta property="og:description" content="【转载】 原文链接">
+<meta property="og:description" content="【转载】 原文链接  参考资料基于最小堆（小根堆）的topn算法基于堆实现的优先级队列：PriorityQueue 解决 Top K 问题Java优先队列（PriorityQueue）示例JDK源码研究PriorityQueue（优先队列）优先级队列：PriorityQueue">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201806251540_236.png">
-<meta property="og:updated_time" content="2018-06-25T07:55:31.148Z">
+<meta property="og:updated_time" content="2018-06-26T02:09:52.062Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java集合-HashSet工作原理及实现">
-<meta name="twitter:description" content="【转载】 原文链接">
-<meta name="twitter:image" content="http://p7dzmubvx.bkt.clouddn.com/201806251540_236.png">
+<meta name="twitter:title" content="Java集合-PriorityQueue工作原理及实现">
+<meta name="twitter:description" content="【转载】 原文链接  参考资料基于最小堆（小根堆）的topn算法基于堆实现的优先级队列：PriorityQueue 解决 Top K 问题Java优先队列（PriorityQueue）示例JDK源码研究PriorityQueue（优先队列）优先级队列：PriorityQueue">
   
     <link rel="alternative" href="/atom.xml" title="briarbear | 熊大" type="application/atom+xml">
   
@@ -173,20 +171,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java集合-HashSet工作原理及实现" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java集合-PriorityQueue工作原理及实现" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java集合-HashSet工作原理及实现
+      Java集合-PriorityQueue工作原理及实现
     </h1>
   
 
         
-        <a href="/2018/06/25/Java集合-HashSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
+        <a href="/2018/06/26/Java集合-PriorityQueue工作原理及实现/" class="archive-article-date">
+  	<time datetime="2018-06-26T02:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
 </a>
         
       </header>
@@ -201,7 +199,7 @@
         <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-                 <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本操作"><span class="toc-number">2.</span> <span class="toc-text">2. 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                 <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li></ol>
                </div>
          <script type="text/javascript">
         function showToc(){
@@ -223,21 +221,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>【转载】 <a href="http://yikun.github.io/2015/04/08/Java-HashSet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
+<p>【转载】 <a href="https://yikun.github.io/2015/04/07/Java-PriorityQueue%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
 </blockquote>
-<a id="more"></a>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><blockquote>
-<p>This class implements the Set interface, backed by a hash table (actually a <strong>HashMap</strong> instance). It makes no guarantees as to the iteration order of the set; in particular, it does not guarantee that the order will remain constant over time. This class permits the null element.</p>
-</blockquote>
-<p>HashSet是基于HashMap来实现的，操作很简单，更像是对HashMap做了一次“封装”，而且只使用了HashMap的key来实现各种特性，我们先来感性的认识一下这个结构：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HashSet&lt;String&gt; set = <span class="keyword">new</span> HashSet&lt;String&gt;();</span><br><span class="line">set.add(<span class="string">"语文"</span>);</span><br><span class="line">set.add(<span class="string">"数学"</span>);</span><br><span class="line">set.add(<span class="string">"英语"</span>);</span><br><span class="line">set.add(<span class="string">"历史"</span>);</span><br><span class="line">set.add(<span class="string">"政治"</span>);</span><br><span class="line">set.add(<span class="string">"地理"</span>);</span><br><span class="line">set.add(<span class="string">"生物"</span>);</span><br><span class="line">set.add(<span class="string">"化学"</span>);</span><br></pre></td></tr></table></figure>
-<p>其大致的结构是这样的：</p>
-<p><img src="http://p7dzmubvx.bkt.clouddn.com/201806251540_236.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"><span class="comment">// Dummy value to associate with an Object in the backing Map</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
-<p><code>map</code>是整个HashSet的核心，而<code>PRESENT</code>则是用来造一个假的<code>value</code>来用的。</p>
-<h3 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2. 基本操作"></a>2. 基本操作</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.put(e, PRESENT)==<span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.remove(o)==PRESENT;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.containsKey(o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>基本操作也非常简单，就是调用<code>HashMap</code>的相关方法，其中<code>value</code>就是之前那个<code>dummy</code>的<code>Object</code>。所以，只要了解 <code>HashMap</code>的实现就可以了。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html" target="_blank" rel="noopener">HashSet(Java Platform 8)</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://www.iteye.com/topic/1061958" target="_blank" rel="noopener">基于最小堆（小根堆）的topn算法</a><br><a href="http://my.oschina.net/leejun2005/blog/135085" target="_blank" rel="noopener">基于堆实现的优先级队列：PriorityQueue 解决 Top K 问题</a><br><a href="http://www.importnew.com/6932.html" target="_blank" rel="noopener">Java优先队列（PriorityQueue）示例</a><br><a href="http://wlh0706-163-com.iteye.com/blog/1850125" target="_blank" rel="noopener">JDK源码研究PriorityQueue（优先队列）</a><br><a href="http://cuisuqiang.iteye.com/blog/2019157" target="_blank" rel="noopener">优先级队列：PriorityQueue</a></p>
 
       
 
@@ -277,11 +263,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Queue</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		
 		</ul>
@@ -348,7 +334,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://briarbear.github.io/2018/06/25/Java集合-HashSet工作原理及实现/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://briarbear.github.io/2018/06/26/Java集合-PriorityQueue工作原理及实现/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -362,18 +348,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java集合-LinkedHashSet工作原理及实现
+          Java集合-ArrayDeque工作原理及实现
         
       </div>
     </a>
   
   
-    <a href="/2018/06/25/Java集合-TreeMap工作原理及实现/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java集合-TreeMap工作原理及实现</div>
+    <a href="/2018/06/26/Java集合-CopyOnWriteArrayList工作原理及实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java集合-CopyOnWriteArrayList工作原理及实现</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -400,7 +386,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-概述"><span class="toc-number">1.</span> <span class="toc-text">1. 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本操作"><span class="toc-number">2.</span> <span class="toc-text">2. 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">3.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -425,7 +411,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "https://briarbear.github.io/2018/06/25/Java集合-HashSet工作原理及实现/",
+  id: "https://briarbear.github.io/2018/06/26/Java集合-PriorityQueue工作原理及实现/",
   owner: 'briarbear',
   repo: 'gitment',
   oauth: {
