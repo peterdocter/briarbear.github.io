@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://briarbear.github.io">
-  <title>Tag: 转载 | briarbear | 熊大</title>
+  <title>Spring-IOC核心原理及手写实现 | briarbear | 熊大</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java程序员成长之路">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="briarbear | 熊大">
-<meta property="og:url" content="https://briarbear.github.io/tags/转载/index.html">
+  <meta name="description" content="0. IOC基本原理 建议不要硬着头皮看Spring代码，本身代码800多m，就是不上班开始看，也不知道什么时候看完，如果想学学IOC，控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多看这些框架的代码，因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下的所有类，解析class的头文件，反射各种信息，再加上封装。很有可能读源码的过程中掉在各种细节出不来，所以读这种源码不必事">
+<meta name="keywords" content="IOC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring-IOC核心原理及手写实现">
+<meta property="og:url" content="https://briarbear.github.io/2018/07/03/Spring-IOC核心原理及手写实现/index.html">
 <meta property="og:site_name" content="briarbear | 熊大">
-<meta property="og:description" content="Java程序员成长之路">
+<meta property="og:description" content="0. IOC基本原理 建议不要硬着头皮看Spring代码，本身代码800多m，就是不上班开始看，也不知道什么时候看完，如果想学学IOC，控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多看这些框架的代码，因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下的所有类，解析class的头文件，反射各种信息，再加上封装。很有可能读源码的过程中掉在各种细节出不来，所以读这种源码不必事">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-03T10:44:25.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="briarbear | 熊大">
-<meta name="twitter:description" content="Java程序员成长之路">
+<meta name="twitter:title" content="Spring-IOC核心原理及手写实现">
+<meta name="twitter:description" content="0. IOC基本原理 建议不要硬着头皮看Spring代码，本身代码800多m，就是不上班开始看，也不知道什么时候看完，如果想学学IOC，控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多看这些框架的代码，因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下的所有类，解析class的头文件，反射各种信息，再加上封装。很有可能读源码的过程中掉在各种细节出不来，所以读这种源码不必事">
   
     <link rel="alternative" href="/atom.xml" title="briarbear | 熊大" type="application/atom+xml">
   
@@ -172,555 +173,287 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-Spring-IOC核心原理及手写实现" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring-IOC核心原理及手写实现
+    </h1>
+  
+
+        
+        <a href="/2018/07/03/Spring-IOC核心原理及手写实现/" class="archive-article-date">
+  	<time datetime="2018-07-03T03:54:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-03</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+                <span class="btn-bg"></span>
+                <span class="btn-text">文章导航</span>
+                </p>
+        <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-IOC基本原理"><span class="toc-number">1.</span> <span class="toc-text">0. IOC基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-说明"><span class="toc-number">2.</span> <span class="toc-text">1. 说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-基本类"><span class="toc-number">3.</span> <span class="toc-text">2. 基本类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-配置解析与容器类"><span class="toc-number">4.</span> <span class="toc-text">3. 配置解析与容器类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-xml配置文件"><span class="toc-number">5.</span> <span class="toc-text">4. xml配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-功能测试"><span class="toc-number">6.</span> <span class="toc-text">5. 功能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-运行结果"><span class="toc-number">7.</span> <span class="toc-text">6. 运行结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">8.</span> <span class="toc-text">相关链接</span></a></li></ol>
+               </div>
+         <script type="text/javascript">
+        function showToc(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:block");
+          show_toc_btn.setAttribute("style","display:none");
+          };
+        function showBtn(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:none");
+          show_toc_btn.setAttribute("style","display:block");
+          };
+         </script>
             
-  
-  
-    
-    
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0-IOC基本原理"><a href="#0-IOC基本原理" class="headerlink" title="0. IOC基本原理"></a>0. IOC基本原理</h2><blockquote>
+<p>建议不要硬着头皮看Spring代码，本身代码800多m，就是不上班开始看，也不知道什么时候看完，如果想学学IOC，控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多看这些框架的代码，因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下的所有类，解析class的头文件，反射各种信息，再加上封装。很有可能读源码的过程中掉在各种细节出不来，所以读这种源码不必事无巨细，理解原理即可。</p>
+</blockquote>
+<a id="more"></a>
+<p>​    基本原理其实就是通过反射解析类及其类的各种信息，包括构造器，方法及其参数，属性。然后将其封装成<code>bean</code>定义信息类、<code>constructor</code>信息类、<code>method</code>信息类、<code>property</code>信息类，最终放在一个<code>map</code>中，也就是所谓的<code>container</code>，池等等，其实就是个<code>map</code>。</p>
+<ol>
+<li>当你写好配置文件，启动项目后，框架会按照你的配置文件找到那个要scan的包，</li>
+<li>然后解析包里面的所有类，找到所有<code>@bean</code>、<code>@service</code>等注解的类，利用反射解析它们，包括解析构造器，方法，属性等，然后封装成各种信息类到一个map里</li>
+<li>每当你需要一个<code>bean</code>的时候，框架就会从<code>container</code>找到是不是有这个类的定义。如果找到就通过构造器new出来（这就是控制反转，不用你new，框架帮你new）</li>
+<li>再在这个类找是不是有要注入的属性或者方法，比如标有<code>@autowrite</code>的属性，如果有则还是到<code>container</code>找对应的解析类，new出对象，并通过之前解析出来的信息类找到<code>setter</code>方法，然后用该方法注入对象（这就是依赖注入）。</li>
+<li>如果其中有一个类<code>container</code>里没找到，则抛出异常，比如常见的<code>spring</code>无法找到该类定义，无法wire的异常。</li>
+<li>还有就是嵌套bean则用了一下递归，<code>container</code>会放到<code>servletcontext</code>里面，每次<code>reQuest</code>从<code>servletcontext</code>找这个<code>container</code>即可，不用多次解析类定义。</li>
+<li>如果<code>bean</code>的<code>scope</code>是<code>singleton</code>，则会重用这个bean不会再重新创建，将这个<code>bean</code>放到一个map里，每次用都先从这个map里面去找。</li>
+<li>如果<code>scope</code>是<code>session</code>，则该<code>bean</code>会放到<code>session</code>里面，仅此而已。</li>
+</ol>
+<hr>
+<h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h2><blockquote>
+<p>IOC是Spring中核心功能之一，基本原理就是通过反射解析类及其各种信息，然后封装成对象，存放在map中，即bean容器。可以根据其基本原理简单实现一个Spring IOC模块,完整代码见文末链接。</p>
+<p>模拟同学会面的打招呼场景，定义 <code>Greeting</code>接口，包含 <code>hello</code>方法，实现对某人打招呼<code>Hello</code>类实现该 <code>Greeting</code> 接口，实现<code>hello</code>方法。然后定义人类<code>Person</code>的抽象类，具备属性 <code>name</code>，<code>Student</code>为该类的继承类。同时还包括<code>BeanFactory</code>接口，以及负责xml文件解析与<code>bean</code>创建等</p>
+</blockquote>
+<hr>
+<h2 id="2-基本类"><a href="#2-基本类" class="headerlink" title="2. 基本类"></a>2. 基本类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 打招呼</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Greeting</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对某个打招呼</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> p</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">(Person p)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> <span class="keyword">implements</span> <span class="title">Greeting</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">(Person p)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello to "</span>+p.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Person抽象类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name; <span class="comment">//姓名</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 学生类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 学生服务类 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Greeting greeting;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Greeting <span class="title">getGreeting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> greeting;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setGreeting</span><span class="params">(Greeting greeting)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.greeting = greeting;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对某人打招呼</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> p</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">helloService</span><span class="params">(Person p)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.greeting.hello(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上述代码中，学生服务类中的 <code>helloService</code>方法，表示调用 <code>greeting</code>的方法，完成对某个打招呼的功能，这里依赖于另外一个对象<code>Person</code>类，这样的依赖注入，通过IOC来实现</li>
+</ul>
+<hr>
+<h2 id="3-配置解析与容器类"><a href="#3-配置解析与容器类" class="headerlink" title="3. 配置解析与容器类"></a>3. 配置解析与容器类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BeanFactory接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanFactroy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getBean</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * IOC 容器类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPathXmlApplicationContext</span> <span class="keyword">implements</span> <span class="title">BeanFactroy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,Object&gt; beans = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(); <span class="comment">//IOC容器</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数，完成xml文件的解析</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClassPathXmlApplicationContext</span><span class="params">()</span> <span class="keyword">throws</span> JDOMException, IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException </span>&#123;</span><br><span class="line">        SAXBuilder builder = <span class="keyword">new</span> SAXBuilder();</span><br><span class="line">        Document document  = builder.build(<span class="keyword">this</span>.getClass().getClassLoader().getResource(<span class="string">"iocbeans.xml"</span>));</span><br><span class="line">        Element root = document.getRootElement();</span><br><span class="line">        <span class="comment">//获得bean元素集合</span></span><br><span class="line">        List&lt;Element&gt; list = root.getChildren(<span class="string">"bean"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">            Element element = list.get(i);</span><br><span class="line">            String id = element.getAttributeValue(<span class="string">"id"</span>);</span><br><span class="line">            String clazz = element.getAttributeValue(<span class="string">"class"</span>);</span><br><span class="line"></span><br><span class="line">            System.out.println(id + <span class="string">" : "</span> + clazz);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//通过反射构建对象</span></span><br><span class="line"><span class="comment">//            Object obj = Class.forName(clazz).newInstance()</span></span><br><span class="line">            Object obj = Class.forName(clazz).getDeclaredConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//添加到map容器中</span></span><br><span class="line">            beans.put(id,obj);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//注入依赖</span></span><br><span class="line">            <span class="keyword">for</span> (Element property : element.getChildren(<span class="string">"property"</span>)) &#123;</span><br><span class="line">                String name = property.getAttributeValue(<span class="string">"name"</span>);</span><br><span class="line">                String injectBean = property.getAttributeValue(<span class="string">"bean"</span>);</span><br><span class="line">                Object propertyObj = beans.get(injectBean);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//拼接setter方法</span></span><br><span class="line">                String methodNmae = <span class="string">"set"</span> + name.substring(<span class="number">0</span>,<span class="number">1</span>).toUpperCase() + name.substring(<span class="number">1</span>);</span><br><span class="line">                System.out.println(<span class="string">"method name = "</span> + methodNmae);</span><br><span class="line"></span><br><span class="line">                Method m = obj.getClass().getMethod(methodNmae,propertyObj.getClass().getInterfaces());</span><br><span class="line"></span><br><span class="line">                <span class="comment">//注入</span></span><br><span class="line">                m.invoke(obj,propertyObj);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getBean</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> beans.get(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-xml配置文件"><a href="#4-xml配置文件" class="headerlink" title="4. xml配置文件"></a>4. xml配置文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"hello"</span> <span class="attr">class</span> = <span class="string">"ioc.Hello"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"student"</span> <span class="attr">class</span>=<span class="string">"ioc.Student"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"service"</span> <span class="attr">class</span>=<span class="string">"ioc.StudentService"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"greeting"</span> <span class="attr">bean</span> = <span class="string">"hello"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-功能测试"><a href="#5-功能测试" class="headerlink" title="5. 功能测试"></a>5. 功能测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentServiceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">helloService</span><span class="params">()</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException, IOException, InstantiationException, JDOMException, InvocationTargetException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="comment">//var jdk10语法</span></span><br><span class="line">        var factory = <span class="keyword">new</span> ClassPathXmlApplicationContext();</span><br><span class="line">	    var service = (StudentService)factory.getBean(<span class="string">"service"</span>); <span class="comment">//获得service对象实例</span></span><br><span class="line">        var student = (Student)factory.getBean(<span class="string">"student"</span>); <span class="comment">//获得student对象实例</span></span><br><span class="line">        student.name = <span class="string">"xiongzp08"</span>;</span><br><span class="line">        service.helloService(student); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-运行结果"><a href="#6-运行结果" class="headerlink" title="6. 运行结果"></a>6. 运行结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hello : ioc.Hello</span><br><span class="line">student : ioc.Student</span><br><span class="line">service : ioc.StudentService</span><br><span class="line">method name = setGreeting</span><br><span class="line">hello to xiongzp08</span><br><span class="line"></span><br><span class="line">Process finished with exit code 0</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://github.com/briarbear/SpringDemo" target="_blank" rel="noopener">完整代码</a></li>
+<li><a href="https://blog.csdn.net/Anger_Coder/article/details/12706277" target="_blank" rel="noopener">Spring Ioc实现机制——简析</a></li>
+<li><a href="https://www.zhihu.com/question/21346206" target="_blank" rel="noopener">知乎-王奕然</a></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-26T02:01:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/">Java集合-ArrayDeque工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Queue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IOC</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//img.fanhaobai.com/qrcode.php?url=https://briarbear.github.io/2018/07/03/Spring-IOC核心原理及手写实现/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/26/Java集合-PriorityQueue工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-26T02:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/07/03/Spring-AOP核心原理及手写实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spring-AOP核心原理及手写实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/27/设计模式-三种工厂模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式-三种工厂模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/26/Java集合-PriorityQueue工作原理及实现/">Java集合-PriorityQueue工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Queue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-IOC基本原理"><span class="toc-number">1.</span> <span class="toc-text">0. IOC基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-说明"><span class="toc-number">2.</span> <span class="toc-text">1. 说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-基本类"><span class="toc-number">3.</span> <span class="toc-text">2. 基本类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-配置解析与容器类"><span class="toc-number">4.</span> <span class="toc-text">3. 配置解析与容器类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-xml配置文件"><span class="toc-number">5.</span> <span class="toc-text">4. xml配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-功能测试"><span class="toc-number">6.</span> <span class="toc-text">5. 功能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-运行结果"><span class="toc-number">7.</span> <span class="toc-text">6. 运行结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">8.</span> <span class="toc-text">相关链接</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/26/Java集合-CopyOnWriteArrayList工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-26T01:57:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/26/Java集合-CopyOnWriteArrayList工作原理及实现/">Java集合-CopyOnWriteArrayList工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/26/Java集合-LinkedList工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-26T01:49:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/26/Java集合-LinkedList工作原理及实现/">Java集合-LinkedList工作原理及实现</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-ArrayList工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T08:25:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-ArrayList工作原理及实现/">Java集合-ArrayList工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-TreeSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-TreeSet工作原理及实现/">Java集合-TreeSet工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:47:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/">Java集合-LinkedHashSet工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-HashSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-HashSet工作原理及实现/">Java集合-HashSet工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-TreeMap工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-TreeMap工作原理及实现/">Java集合-TreeMap工作原理及实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/25/Java集合-集合框架概述/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/25/Java集合-集合框架概述/">Java集合-集合框架概述</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/转载/page/2/">2</a><a class="extend next" rel="next" href="/tags/转载/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "https://briarbear.github.io/2018/07/03/Spring-IOC核心原理及手写实现/",
+  owner: 'briarbear',
+  repo: 'gitment',
+  oauth: {
+    client_id: '36d62a461ec074823399',
+    client_secret: 'e99dbaf6534c9ba030d5f5afd1560fb297482038',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
   
 
 
@@ -744,9 +477,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
