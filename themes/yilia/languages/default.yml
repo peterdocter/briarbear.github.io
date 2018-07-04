@@ -3,8 +3,8 @@ search: Search
 tags: Tags
 tagcloud: Tag Cloud
 tweets: Tweets
-prev: Prev
-next: Next
+prev: 上一页
+next: 下一页
 comment: Comments
 archive_a: Archives
 archive_b: "Archives: %s"
