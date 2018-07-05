@@ -116,7 +116,8 @@ public class ProducerConsumerExample {
         int numProducers = 4; //生产者数量
         int numConsumers = 3; //消费者数量
         //使用LinkedBlockingDeque - 一个由链表结构组成的双向阻塞队列
-        BlockingQueue<Object> queue = new LinkedBlockingDeque<>(20);
+        //BlockingQueue<Object> queue = new LinkedBlockingDeque<>(20);
+        BlockingQueue<Object> queue = new LinkedBlockingQueue<>(20); //也可以使用链表阻塞队列
         //分别启动生产者、消费者
         for (int i = 0; i < numProducers; i++) {
             new Thread(new Producer(queue)).start();
