@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="briarbear | 熊大">
 <meta property="og:description" content="1. 阻塞队列 前文中讲到过：阻塞队列（BlockingQueue）是一个支持两个附加操作的队列。阻塞队列常用于生产者和消费者的场景，生产者是向队列中添加元素的线程，消费者是从队列取元素的线程。阻塞队列就是生产者用来存放元素，消费者用来获取元素的容器   完整代码见文末">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-04T03:46:38.002Z">
+<meta property="og:updated_time" content="2018-07-04T07:13:10.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发-阻塞队列实现生产者消费者">
 <meta name="twitter:description" content="1. 阻塞队列 前文中讲到过：阻塞队列（BlockingQueue）是一个支持两个附加操作的队列。阻塞队列常用于生产者和消费者的场景，生产者是向队列中添加元素的线程，消费者是从队列取元素的线程。阻塞队列就是生产者用来存放元素，消费者用来获取元素的容器   完整代码见文末">
@@ -234,7 +234,7 @@
 <hr>
 <h2 id="3-生产者"><a href="#3-生产者" class="headerlink" title="3. 生产者"></a>3. 生产者</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生产者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> BlockingQueue&lt;Object&gt; queue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue&lt;Object&gt; queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生产者创建一个资源（Object对象）并将它存入到队列中，如果队列已满，它将会等待到消费者线程从队列中取走资源，所以队列长度永远不会超过20</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            Object object = getResource();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                queue.put(object);</span><br><span class="line">                System.out.println(<span class="string">"Produced resource...the queue size is "</span> + queue.size());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//生产对象</span></span><br><span class="line">    <span class="function">Object <span class="title">getResource</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Object();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="4-测试启动"><a href="#4-测试启动" class="headerlink" title="4. 测试启动"></a>4. 测试启动</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试启动类</span></span><br><span class="line"><span class="comment"> * 分别启动4个生成者线程，3个消费者线程</span></span><br><span class="line"><span class="comment"> * 生产者不断添加对象到队列中，消费者不断从队列中取出</span></span><br><span class="line"><span class="comment"> * 运行10s后，程序退出</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProducerConsumerExample</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numProducers = <span class="number">4</span>; <span class="comment">//生产者数量</span></span><br><span class="line">        <span class="keyword">int</span> numConsumers = <span class="number">3</span>; <span class="comment">//消费者数量</span></span><br><span class="line">        <span class="comment">//使用LinkedBlockingDeque - 一个由链表结构组成的双向阻塞队列</span></span><br><span class="line">        BlockingQueue&lt;Object&gt; queue = <span class="keyword">new</span> LinkedBlockingDeque&lt;&gt;(<span class="number">20</span>);</span><br><span class="line">        <span class="comment">//分别启动生产者、消费者</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numProducers; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Producer(queue)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numConsumers; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Consumer(queue)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">10</span>*<span class="number">1000</span>);</span><br><span class="line">        Thread.yield();</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-测试启动"><a href="#4-测试启动" class="headerlink" title="4. 测试启动"></a>4. 测试启动</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试启动类</span></span><br><span class="line"><span class="comment"> * 分别启动4个生成者线程，3个消费者线程</span></span><br><span class="line"><span class="comment"> * 生产者不断添加对象到队列中，消费者不断从队列中取出</span></span><br><span class="line"><span class="comment"> * 运行10s后，程序退出</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProducerConsumerExample</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> numProducers = <span class="number">4</span>; <span class="comment">//生产者数量</span></span><br><span class="line">        <span class="keyword">int</span> numConsumers = <span class="number">3</span>; <span class="comment">//消费者数量</span></span><br><span class="line">        <span class="comment">//使用LinkedBlockingDeque - 一个由链表结构组成的双向阻塞队列</span></span><br><span class="line">        <span class="comment">//BlockingQueue&lt;Object&gt; queue = new LinkedBlockingDeque&lt;&gt;(20);</span></span><br><span class="line">        BlockingQueue&lt;Object&gt; queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;(<span class="number">20</span>); <span class="comment">//也可以使用链表阻塞队列</span></span><br><span class="line">        <span class="comment">//分别启动生产者、消费者</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numProducers; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Producer(queue)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numConsumers; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Consumer(queue)).start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">10</span>*<span class="number">1000</span>);</span><br><span class="line">        Thread.yield();</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>运行结果：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">consumed resource... the queue size is1</span><br><span class="line">Produced resource...the queue size is 3</span><br><span class="line">Produced resource...the queue size is 2</span><br><span class="line">consumed resource... the queue size is2</span><br><span class="line">consumed resource... the queue size is3</span><br><span class="line">Produced resource...the queue size is 3</span><br><span class="line">Produced resource...the queue size is 4</span><br><span class="line">Produced resource...the queue size is 2</span><br><span class="line">Produced resource...the queue size is 3</span><br><span class="line">Produced resource...the queue size is 4</span><br><span class="line">Produced resource...the queue size is 5</span><br><span class="line">comsuming object java.lang.Object@619f2f27</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
 <hr>
@@ -364,6 +364,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/07/04/Java并发-Synchronize与volatile应用示例（售票系统）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java并发-Synchronize与volatile应用示例（售票系统）
+        
+      </div>
+    </a>
   
   
     <a href="/2018/07/04/Java并发-Java中的阻塞队列/" id="article-nav-older" class="article-nav-link-wrap">
@@ -522,7 +531,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +539,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">List</a>
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,7 +555,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
+                <a href="javascript:void(0)" class="js-tag color5">List</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +567,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,7 +575,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
               </li>
             
             <div class="clearfix"></div>
