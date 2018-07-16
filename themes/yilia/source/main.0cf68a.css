@@ -1000,7 +1000,8 @@ body {
 
 /*代码字体*/
 .article-entry .highlight,.article-entry pre {
-	background: #272822;
+	/*background: #272822;*/
+	background: rgba(63, 63, 63, 1);
 	margin: 10px 0;
 	padding: 10px;
 	overflow: auto;
