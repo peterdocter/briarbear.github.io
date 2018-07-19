@@ -174,6 +174,671 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java并发-Java中的阻塞队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/04/Java并发-Java中的阻塞队列/">Java并发-Java中的阻塞队列</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/04/Java并发-Java中的阻塞队列/" class="archive-article-date">
+  	<time datetime="2018-07-04T01:57:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文摘自《Java并发编程的艺术-方腾飞》</p>
+</blockquote>
+<blockquote>
+<p>本节将介绍什么是阻塞队列，以及Java中阻塞队列的4种四种处理方式，并介绍Java7（Java8相同）中提供的7种阻塞队列，稍后分析阻塞队列的一种实现方式</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/07/04/Java并发-Java中的阻塞队列/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">阻塞队列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Spring-AOP核心原理及手写实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/03/Spring-AOP核心原理及手写实现/">Spring-AOP核心原理及手写实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/03/Spring-AOP核心原理及手写实现/" class="archive-article-date">
+  	<time datetime="2018-07-03T10:43:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-03</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-基本原理"><a href="#1-基本原理" class="headerlink" title="1. 基本原理"></a>1. 基本原理</h2><blockquote>
+<p>Spring AOP构建在动态代理基础之上，因此，Spring对AOP的支持局限于方法拦截（AspectJ静态代理框架能够实现更为高级的功能，本文不做介绍）</p>
+<p>Spring AOP使用的动态代理，所谓的动态代理就是说AOP框架不会去修改字节码，而是在内存中临时为方法生成一个AOP对象，这个AOP对象包含了目标对象的全部方法，并且在特定的切点做了增强处理，并回调原对象的方法 </p>
+</blockquote>
+<p>Spring AOP中的动态代理主要有两种方式 :</p>
+<ol>
+<li><strong>JDK动态代理</strong>：JDK动态代理通过反射来接收被代理的类，并且要求被代理的类必须实现一个接口。JDK动态代理的核心是<code>InvocationHandler</code>接口和<code>Proxy</code>类 </li>
+<li><strong>CGLIB动态代理</strong>： 如果目标类没有实现接口，那么Spring AOP会选择使用CGLIB来动态代理目标类。CGLIB（Code Generation Library），是一个代码生成的类库，可以在运行时动态的生成某个类的子类，注意，CGLIB是通过继承的方式做的动态代理，因此如果某个类被标记为final，那么它是无法使用CGLIB做动态代理的</li>
+<li>下面将手动实现一个AOP功能（完整代码见文末）</li>
+</ol>
+        
+          <a class="article-more-a" href="/2018/07/03/Spring-AOP核心原理及手写实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">AOP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Spring-IOC核心原理及手写实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/03/Spring-IOC核心原理及手写实现/">Spring-IOC核心原理及手写实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/03/Spring-IOC核心原理及手写实现/" class="archive-article-date">
+  	<time datetime="2018-07-03T03:54:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-03</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0-IOC基本原理"><a href="#0-IOC基本原理" class="headerlink" title="0. IOC基本原理"></a>0. IOC基本原理</h2><blockquote>
+<p>建议不要硬着头皮看Spring代码，本身代码800多m，就是不上班开始看，也不知道什么时候看完，如果想学学IOC，控制反转这些建议看看jodd项目，比较简练，但是我仍然不建议过多看这些框架的代码，因为这些代码要完成任务需要很多琐碎的类实现，比如读取某个包下的所有类，解析class的头文件，反射各种信息，再加上封装。很有可能读源码的过程中掉在各种细节出不来，所以读这种源码不必事无巨细，理解原理即可。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/07/03/Spring-IOC核心原理及手写实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IOC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式-三种工厂模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/27/设计模式-三种工厂模式/">设计模式-三种工厂模式</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/27/设计模式-三种工厂模式/" class="archive-article-date">
+  	<time datetime="2018-06-27T08:29:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-27</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>建议结合示例源码理解</p>
+</blockquote>
+<hr>
+<h3 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1  简单工厂模式"></a>1  简单工厂模式</h3><blockquote>
+<p>简单工厂模式(Simple Factory Pattern)：定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是静态(static)方法，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/06/27/设计模式-三种工厂模式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">工厂模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java并发-ThreadLocal理解与适用场景" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/26/Java并发-ThreadLocal理解与适用场景/">Java并发-ThreadLocal理解与适用场景</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/26/Java并发-ThreadLocal理解与适用场景/" class="archive-article-date">
+  	<time datetime="2018-06-26T08:41:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<blockquote>
+<p>Java中的<code>ThreadLocal</code>类允许我们创建只能被同一个线程读写的变量。因此，如果一段代码含有一个<code>ThreadLocal</code>变量的引用，即使两个线程同时执行这段代码，它们也无法访问到对方的<code>ThreadLocal</code>变量</p>
+</blockquote>
+<ul>
+<li><code>ThreadLocal</code>并不是解决多线程共享变量的问题，既然变量不共享，更谈不上同步到问题</li>
+<li><code>ThreadLocal</code> 提供了线程本地变量的实例。它与普通变量的区别在于，每个使用该变量的线程都会初始化一个完全独立的实例副本。<code>ThreadLocal</code> 变量通常被<code>private static</code>修饰。当一个线程结束时，它所使用的所有 <code>ThreadLocal</code> 相对的实例副本都可被回收</li>
+</ul>
+<hr>
+        
+          <a class="article-more-a" href="/2018/06/26/Java并发-ThreadLocal理解与适用场景/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ThreadLocal</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java集合-ArrayDeque工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/">Java集合-ArrayDeque工作原理及实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/" class="archive-article-date">
+  	<time datetime="2018-06-26T02:01:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>【转载】<a href="https://yikun.github.io/2015/04/11/Java-ArrayDeque%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2018/06/26/Java集合-ArrayDeque工作原理及实现/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Queue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java集合-PriorityQueue工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/26/Java集合-PriorityQueue工作原理及实现/">Java集合-PriorityQueue工作原理及实现</a>
+    </h1>
+  
+
+        
+        <a href="/2018/06/26/Java集合-PriorityQueue工作原理及实现/" class="archive-article-date">
+  	<time datetime="2018-06-26T02:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>【转载】 <a href="https://yikun.github.io/2015/04/07/Java-PriorityQueue%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
+</blockquote>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://www.iteye.com/topic/1061958" target="_blank" rel="noopener">基于最小堆（小根堆）的topn算法</a><br><a href="http://my.oschina.net/leejun2005/blog/135085" target="_blank" rel="noopener">基于堆实现的优先级队列：PriorityQueue 解决 Top K 问题</a><br><a href="http://www.importnew.com/6932.html" target="_blank" rel="noopener">Java优先队列（PriorityQueue）示例</a><br><a href="http://wlh0706-163-com.iteye.com/blog/1850125" target="_blank" rel="noopener">JDK源码研究PriorityQueue（优先队列）</a><br><a href="http://cuisuqiang.iteye.com/blog/2019157" target="_blank" rel="noopener">优先级队列：PriorityQueue</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Queue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java集合-CopyOnWriteArrayList工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -471,685 +1136,6 @@
 
 
   
-    <article id="post-Java集合-TreeSet工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-TreeSet工作原理及实现/">Java集合-TreeSet工作原理及实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-TreeSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:57:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】 <a href="http://yikun.github.io/2015/04/10/Java-TreeSet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
-</blockquote>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h3>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-TreeSet工作原理及实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-LinkedHashSet工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/">Java集合-LinkedHashSet工作原理及实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:47:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】<a href="http://yikun.github.io/2015/04/09/Java-LinkedHashSet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-LinkedHashSet工作原理及实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-HashSet工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-HashSet工作原理及实现/">Java集合-HashSet工作原理及实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-HashSet工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:36:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】 <a href="http://yikun.github.io/2015/04/08/Java-HashSet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-HashSet工作原理及实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Set</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-TreeMap工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-TreeMap工作原理及实现/">Java集合-TreeMap工作原理及实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-TreeMap工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】<a href="http://yikun.github.io/2015/04/06/Java-TreeMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a></p>
-</blockquote>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><blockquote>
-<p>A Red-Black tree based NavigableMap implementation. The map is sorted according to the natural ordering of its keys, or by a Comparator provided at map creation time, depending on which constructor is used.<br>This implementation provides guaranteed log(n) time cost for the containsKey, get, put and remove operations. Algorithms are adaptations of those in Cormen, Leiserson, and Rivest’s Introduction to Algorithms.</p>
-</blockquote>
-<p>之前已经学习过<code>HashMap</code>和<code>LinkedHashMap</code>了，<code>HashMap</code>不保证数据有序，<code>LinkedHashMap</code>保证数据可以保持插入顺序，而如果我们希望<code>Map</code>可以保持<code>key</code>的大小顺序的时候，我们就需要利用<code>TreeMap</code>了。</p>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-TreeMap工作原理及实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-集合框架概述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-集合框架概述/">Java集合-集合框架概述</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-集合框架概述/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】<a href="http://yikun.github.io/2015/03/31/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" target="_blank" rel="noopener">原文链接</a></p>
-</blockquote>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><h4 id="什么是集合？"><a href="#什么是集合？" class="headerlink" title="什么是集合？"></a>什么是集合？</h4><p>这Java官方的<a href="https://docs.oracle.com/javase/tutorial/collections/intro/index.html" target="_blank" rel="noopener">入门文档</a>是这样描述集合的：</p>
-<blockquote>
-<p>Collection(有时候也叫container)是一个简单的对象，它把多个元素组织成一个单元。集合可以用来存储、检索、操作、通信。通常情况下，集合代表了一个自然数据项，比如一组手牌(牌的集合)、邮件文件夹(邮件的集合)、电话目录(姓名到电话的映射)。如果你使用过Java或者其他语言，你应该很熟悉集合。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-集合框架概述/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">集合</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-LinkedHashMap工作原理与实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-LinkedHashMap工作原理与实现/">Java集合-LinkedHashMap工作原理与实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-LinkedHashMap工作原理与实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T07:11:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】<a href="http://yikun.github.io/2015/04/02/Java-LinkedHashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接</a>  - （部分修改与补充）</p>
-</blockquote>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>在理解了介绍的<code>HashMap</code>后，我们来学习<code>LinkedHashMap</code>的工作原理及实现。首先还是类似的，我们写一个简单的<code>LinkedHashMap</code>的程序：</p>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-LinkedHashMap工作原理与实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java集合-HashMap工作原理及实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/25/Java集合-HashMap工作原理及实现/">Java集合-HashMap工作原理及实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/25/Java集合-HashMap工作原理及实现/" class="archive-article-date">
-  	<time datetime="2018-06-25T06:24:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-25</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>【转载】<a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">原文链接 </a> - （部分修改与补充）</p>
-</blockquote>
-<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><hr>
-<p>从本文你可以学习到：</p>
-<blockquote>
-<ol>
-<li>什么时候会使用<code>HashMap</code>？他有什么特点？</li>
-<li>你知道<code>HashMap</code>的工作原理吗？</li>
-<li>你知道<code>get</code>和put的原理吗？<code>equals()</code>和<code>hashCode()</code>的都有什么作用？</li>
-<li>你知道<code>hash</code>的实现吗？为什么要这样实现？</li>
-<li>如果<code>HashMap</code>的大小超过了负载因子<code>(load factor)</code>定义的容量，怎么办？</li>
-</ol>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/06/25/Java集合-HashMap工作原理及实现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
@@ -1243,19 +1229,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+                <a href="javascript:void(0)" class="js-tag color3">反射</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1263,7 +1249,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
+                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CyclicBarrier</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1271,7 +1261,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Semaphore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CountDownLatch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">List</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1283,7 +1289,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+                <a href="javascript:void(0)" class="js-tag color3">集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1291,11 +1297,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集合</a>
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">负载均衡</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
