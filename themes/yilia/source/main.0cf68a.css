@@ -2301,8 +2301,9 @@ pre .css~* .id,pre .id {
 }
 
 .article-entry pre {
-	/*line-height: 1.5;*/
-	line-height: normal;
+	/*代码块字体高度*/
+	line-height: 1.3;
+	/*line-height: normal;*/
 	margin-top: 10px;
 	padding: 5px 15px;
 	overflow-x: auto;

@@ -1,5 +1,5 @@
 ---
-title: Java并发-CyclicBarrier工具类
+title: Java并发-同步屏障CyclicBarrier
 date: 2018-07-16 16:20:58
 toc: true
 tags:
