@@ -1153,7 +1153,8 @@ pre .class .params,pre .function .keyword,pre .keyword {
 }
 
 pre .css .value,pre .doctype,pre .function,pre .params,pre .tag {
-	color: #fff
+	/*color: #fff*/
+	color: #dfbf6a
 }
 
 pre .at_rule,pre .at_rule .keyword,pre .css~* .tag,pre .preprocessor,pre .preprocessor .keyword,pre .title {
@@ -1184,10 +1185,11 @@ pre .css~* .id,pre .id {
 	display: inline-block;
 	text-decoration: none;
 	font-weight: 400;
-	font-size: 10px;
+	/*font-size: 10px; 分类字体大小*/
+	font-size: 14px;
 	color: #fff;
-	height: 18px;
-	line-height: 18px;
+	height: 20px;
+	line-height: 20px;
 	float: left;
 	padding: 0 5px 0 10px;
 	position: relative;
