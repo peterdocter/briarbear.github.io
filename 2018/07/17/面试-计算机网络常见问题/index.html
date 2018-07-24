@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://briarbear.github.io">
   <title>面试-计算机网络常见问题 | briarbear | 熊大</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改） 1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不应在">
+  <meta name="description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改）  1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不">
 <meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试-计算机网络常见问题">
 <meta property="og:url" content="https://briarbear.github.io/2018/07/17/面试-计算机网络常见问题/index.html">
 <meta property="og:site_name" content="briarbear | 熊大">
-<meta property="og:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改） 1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不应在">
+<meta property="og:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改）  1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-17T03:20:12.782Z">
+<meta property="og:updated_time" content="2018-07-23T08:24:13.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试-计算机网络常见问题">
-<meta name="twitter:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改） 1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不应在">
+<meta name="twitter:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改）  1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不">
   
     <link rel="alternative" href="/atom.xml" title="briarbear | 熊大" type="application/atom+xml">
   
@@ -194,11 +194,37 @@
     
       <!-- 目录内容 -->
       
+          <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+                <span class="btn-bg"></span>
+                <span class="btn-text">文章导航</span>
+                </p>
+        <div id="toc-article" class="toc-article">
+            <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+          <strong class="toc-title">文章目录</strong>
+                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-GET-和-POST-的区别"><span class="toc-number">1.</span> <span class="toc-text">1. GET 和 POST 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-DNS使用的协议"><span class="toc-number">2.</span> <span class="toc-text">2. DNS使用的协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-幂等"><span class="toc-number">3.</span> <span class="toc-text">3. 幂等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Cookies-和-session-区别"><span class="toc-number">4.</span> <span class="toc-text">3. Cookies 和 session 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-粘包和拆包产生的原因"><span class="toc-number">5.</span> <span class="toc-text">4. TCP 粘包和拆包产生的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP-粘包和拆包的解决策略"><span class="toc-number">6.</span> <span class="toc-text">5. TCP 粘包和拆包的解决策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-三次握手"><span class="toc-number">7.</span> <span class="toc-text">6. 三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-四次挥手"><span class="toc-number">8.</span> <span class="toc-text">7. 四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-一次完整的-HTTP-请求过程"><span class="toc-number">9.</span> <span class="toc-text">8. 一次完整的 HTTP 请求过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-讲一下长连接"><span class="toc-number">10.</span> <span class="toc-text">9. 讲一下长连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-TCP-如何保证可靠传输？"><span class="toc-number">11.</span> <span class="toc-text">10. TCP 如何保证可靠传输？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-详细介绍-http"><span class="toc-number">12.</span> <span class="toc-text">11. 详细介绍 http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-URI-和-URL-的区别"><span class="toc-number">13.</span> <span class="toc-text">12. URI 和 URL 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-HTTPS-和-HTTP-的区别"><span class="toc-number">14.</span> <span class="toc-text">13. HTTPS 和 HTTP 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-HTTPS-是如何保证数据传输的安全"><span class="toc-number">15.</span> <span class="toc-text">14. HTTPS 是如何保证数据传输的安全</span></a></li></ol>
+               </div>
+         <script type="text/javascript">
+        function showToc(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:block");
+          show_toc_btn.setAttribute("style","display:none");
+          };
+        function showBtn(){
+          var toc_article = document.getElementById("toc-article");
+          var show_toc_btn = document.getElementById("show-toc-btn");
+          toc_article.setAttribute("style","display:none");
+          show_toc_btn.setAttribute("style","display:block");
+          };
+         </script>
+            
       <!-- 目录内容结束 -->    
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>【转载】-<a href="https://mp.weixin.qq.com/s?__biz=MzIwMTY0NDU3Nw==&amp;mid=2651936192&amp;idx=1&amp;sn=65808d8b76c973f94ec32326a7138486&amp;chksm=8d0f3a8eba78b398e7afa6b436a941535caf73da780a59c99bf0192ed243570e7438be528545&amp;mpshare=1&amp;scene=1&amp;srcid=0717g28T23qThY2EyUoBr1ho#rd" target="_blank" rel="noopener">Java面试中常见的计算机网络方面问题</a>-（部分增加修改）</p>
+        <blockquote>
+<p>【转载】-<a href="https://mp.weixin.qq.com/s?__biz=MzIwMTY0NDU3Nw==&amp;mid=2651936192&amp;idx=1&amp;sn=65808d8b76c973f94ec32326a7138486&amp;chksm=8d0f3a8eba78b398e7afa6b436a941535caf73da780a59c99bf0192ed243570e7438be528545&amp;mpshare=1&amp;scene=1&amp;srcid=0717g28T23qThY2EyUoBr1ho#rd" target="_blank" rel="noopener">Java面试中常见的计算机网络方面问题</a>-（部分增加修改）</p>
+</blockquote>
 <h2 id="1-GET-和-POST-的区别"><a href="#1-GET-和-POST-的区别" class="headerlink" title="1. GET 和 POST 的区别"></a>1. GET 和 POST 的区别</h2><p><strong>GET方法</strong>（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;name2=value2</p>
 <ul>
 <li>GET 请求可被缓存<ul>
@@ -507,6 +533,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SpringBoot核心原理-手写实现spring-boot-starter与自动配置
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/07/17/Java并发-控制并发线程数的Semaphore/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Java并发-控制并发线程数的Semaphore</div>
@@ -528,6 +563,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-GET-和-POST-的区别"><span class="toc-number">1.</span> <span class="toc-text">1. GET 和 POST 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-DNS使用的协议"><span class="toc-number">2.</span> <span class="toc-text">2. DNS使用的协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-幂等"><span class="toc-number">3.</span> <span class="toc-text">3. 幂等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Cookies-和-session-区别"><span class="toc-number">4.</span> <span class="toc-text">3. Cookies 和 session 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-粘包和拆包产生的原因"><span class="toc-number">5.</span> <span class="toc-text">4. TCP 粘包和拆包产生的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP-粘包和拆包的解决策略"><span class="toc-number">6.</span> <span class="toc-text">5. TCP 粘包和拆包的解决策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-三次握手"><span class="toc-number">7.</span> <span class="toc-text">6. 三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-四次挥手"><span class="toc-number">8.</span> <span class="toc-text">7. 四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-一次完整的-HTTP-请求过程"><span class="toc-number">9.</span> <span class="toc-text">8. 一次完整的 HTTP 请求过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-讲一下长连接"><span class="toc-number">10.</span> <span class="toc-text">9. 讲一下长连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-TCP-如何保证可靠传输？"><span class="toc-number">11.</span> <span class="toc-text">10. TCP 如何保证可靠传输？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-详细介绍-http"><span class="toc-number">12.</span> <span class="toc-text">11. 详细介绍 http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-URI-和-URL-的区别"><span class="toc-number">13.</span> <span class="toc-text">12. URI 和 URL 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-HTTPS-和-HTTP-的区别"><span class="toc-number">14.</span> <span class="toc-text">13. HTTPS 和 HTTP 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-HTTPS-是如何保证数据传输的安全"><span class="toc-number">15.</span> <span class="toc-text">14. HTTPS 是如何保证数据传输的安全</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -647,10 +695,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
@@ -659,11 +703,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +715,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CyclicBarrier</a>
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,7 +727,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+                <a href="javascript:void(0)" class="js-tag color4">CyclicBarrier</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,7 +767,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,11 +775,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,20 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://briarbear.github.io">
-  <title>Java并发-Synchronize与volatile应用示例（售票系统） | briarbear | 熊大</title>
+  <title>SpringBoot核心原理-手写实现spring-boot-starter与自动配置 | briarbear | 熊大</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="场景描述：假设现在我们总共有1000张票要进行出售，共有10个出售点，那么当售票到最后只有一张票时每个售票点如何去处理这唯一的一张票？或者对于某一张票而言，假设它正在售票站1售票的程序执行过程中，但是还没有出售，那么此时，其他售票站改如何去处理这张票呢？">
-<meta name="keywords" content="并发,Synchronize">
+  <meta name="description" content="主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习  1. SpringBoot实现原理&amp;nbsp;&amp;nbsp;Springboot只所以能实现快速开发，其中最重要的特征就是spring-boot-starter与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了Spring4.x+对条件化配置的支持，合理地">
+<meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java并发-Synchronize与volatile应用示例（售票系统）">
-<meta property="og:url" content="https://briarbear.github.io/2018/07/04/Java并发-Synchronize与volatile应用示例（售票系统）/index.html">
+<meta property="og:title" content="SpringBoot核心原理-手写实现spring-boot-starter与自动配置">
+<meta property="og:url" content="https://briarbear.github.io/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/index.html">
 <meta property="og:site_name" content="briarbear | 熊大">
-<meta property="og:description" content="场景描述：假设现在我们总共有1000张票要进行出售，共有10个出售点，那么当售票到最后只有一张票时每个售票点如何去处理这唯一的一张票？或者对于某一张票而言，假设它正在售票站1售票的程序执行过程中，但是还没有出售，那么此时，其他售票站改如何去处理这张票呢？">
+<meta property="og:description" content="主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习  1. SpringBoot实现原理&amp;nbsp;&amp;nbsp;Springboot只所以能实现快速开发，其中最重要的特征就是spring-boot-starter与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了Spring4.x+对条件化配置的支持，合理地">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-20T07:48:14.725Z">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241814_743.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241820_966.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241913_970.png">
+<meta property="og:image" content="c:/Users/Xbear/AppData/Local/Temp/1532431302199.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241924_515.png">
+<meta property="og:image" content="c:/Users/Xbear/AppData/Local/Temp/1532431610756.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241930_197.png">
+<meta property="og:updated_time" content="2018-07-24T11:53:38.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发-Synchronize与volatile应用示例（售票系统）">
-<meta name="twitter:description" content="场景描述：假设现在我们总共有1000张票要进行出售，共有10个出售点，那么当售票到最后只有一张票时每个售票点如何去处理这唯一的一张票？或者对于某一张票而言，假设它正在售票站1售票的程序执行过程中，但是还没有出售，那么此时，其他售票站改如何去处理这张票呢？">
+<meta name="twitter:title" content="SpringBoot核心原理-手写实现spring-boot-starter与自动配置">
+<meta name="twitter:description" content="主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习  1. SpringBoot实现原理&amp;nbsp;&amp;nbsp;Springboot只所以能实现快速开发，其中最重要的特征就是spring-boot-starter与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了Spring4.x+对条件化配置的支持，合理地">
+<meta name="twitter:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241814_743.png">
   
     <link rel="alternative" href="/atom.xml" title="briarbear | 熊大" type="application/atom+xml">
   
@@ -173,20 +181,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java并发-Synchronize与volatile应用示例（售票系统）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SpringBoot核心原理-手写实现spring-boot-starter与自动配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java并发-Synchronize与volatile应用示例（售票系统）
+      SpringBoot核心原理-手写实现spring-boot-starter与自动配置
     </h1>
   
 
         
-        <a href="/2018/07/04/Java并发-Synchronize与volatile应用示例（售票系统）/" class="archive-article-date">
-  	<time datetime="2018-07-04T07:14:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
+        <a href="/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/" class="archive-article-date">
+  	<time datetime="2018-07-24T11:51:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-24</time>
 </a>
         
       </header>
@@ -201,7 +209,7 @@
         <div id="toc-article" class="toc-article">
             <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
           <strong class="toc-title">文章目录</strong>
-                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-synchronize解决方案"><span class="toc-number">1.</span> <span class="toc-text">1. synchronize解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-volatile-AtomicInteger解决方案"><span class="toc-number">2.</span> <span class="toc-text">2. volatile+AtomicInteger解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">3.</span> <span class="toc-text">相关链接</span></a></li></ol>
+                 <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SpringBoot实现原理"><span class="toc-number">1.</span> <span class="toc-text">1. SpringBoot实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实现步骤"><span class="toc-number">2.</span> <span class="toc-text">2. 实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-IDEA新建maven项目"><span class="toc-number">2.1.</span> <span class="toc-text">1. IDEA新建maven项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-修改pom-xml文件"><span class="toc-number">2.2.</span> <span class="toc-text">2. 修改pom.xml文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-新建配置属性类"><span class="toc-number">2.3.</span> <span class="toc-text">3. 新建配置属性类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-判断服务类"><span class="toc-number">2.4.</span> <span class="toc-text">4. 判断服务类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-自动配置类"><span class="toc-number">2.5.</span> <span class="toc-text">5. 自动配置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-注册配置"><span class="toc-number">2.6.</span> <span class="toc-text">6. 注册配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-安装到本地库"><span class="toc-number">2.7.</span> <span class="toc-text">7. 安装到本地库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-新建测试项目"><span class="toc-number">2.8.</span> <span class="toc-text">8. 新建测试项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-相关连接"><span class="toc-number">3.</span> <span class="toc-text">3. 相关连接</span></a></li></ol>
                </div>
          <script type="text/javascript">
         function showToc(){
@@ -223,22 +231,77 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>场景描述：假设现在我们总共有1000张票要进行出售，共有10个出售点，那么当售票到最后只有一张票时每个售票点如何去处理这唯一的一张票？或者对于某一张票而言，假设它正在售票站1售票的程序执行过程中，但是还没有出售，那么此时，其他售票站改如何去处理这张票呢？</p>
+<p>主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习</p>
 </blockquote>
+<h2 id="1-SpringBoot实现原理"><a href="#1-SpringBoot实现原理" class="headerlink" title="1. SpringBoot实现原理"></a>1. SpringBoot实现原理</h2><p>&nbsp;&nbsp;<code>Springboot</code>只所以能实现快速开发，其中最重要的特征就是<code>spring-boot-starter</code>与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了<code>Spring4.x+</code>对条件化配置的支持，合理地推测应用所需的<code>bean</code>并自动配置他们，这些则符合<code>springboot</code>的设计理念-<strong>习惯优于配置</strong>，从而大大减少繁多的配置，提高开发效率</p>
 <a id="more"></a>
+<h2 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2. 实现步骤"></a>2. 实现步骤</h2><h3 id="1-IDEA新建maven项目"><a href="#1-IDEA新建maven项目" class="headerlink" title="1. IDEA新建maven项目"></a>1. IDEA新建maven项目</h3><p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241814_743.png" alt=""></p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241820_966.png" alt=""></p>
+<h3 id="2-修改pom-xml文件"><a href="#2-修改pom-xml文件" class="headerlink" title="2. 修改pom.xml文件"></a>2. 修改pom.xml文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xzp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-hello<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>spring-boot-starter-hello<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-autoconfigure<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-新建配置属性类"><a href="#3-新建配置属性类" class="headerlink" title="3. 新建配置属性类"></a>3. 新建配置属性类</h3><ul>
+<li>maven创建项目时，如果相关的目录，则可以手动建立</li>
+<li><code>HelloServiceProperties.java</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"hello"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 默认的msg是world</span></span><br><span class="line"><span class="comment">     * 可以通过在application.properties中hello.msg= 来设置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MSG = <span class="string">"world"</span>;</span><br><span class="line">    <span class="keyword">private</span> String msg = MSG;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getMSG</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> MSG;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMsg</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-判断服务类"><a href="#4-判断服务类" class="headerlink" title="4. 判断服务类"></a>4. 判断服务类</h3><ul>
+<li><p>该示例中通过判断此类的存在与否来创建这个类的Bean，这个类可以是第三方类库的类</p>
+</li>
+<li><p><code>HelloService.java</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello "</span> + msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMsg</span><span class="params">(String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-自动配置类"><a href="#5-自动配置类" class="headerlink" title="5. 自动配置类"></a>5. 自动配置类</h3><ul>
+<li><code>HelloServiceAutoConfiguration.java</code></li>
+<li>根据 HelloServiceProperties 提供的参数，并通过＠ConditionalOnClass 判断 HelloService 这 个类在类路径中是否存在，且当容器中没有这个 Bean 的情况下自动配置这个 Bean.    </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(HelloServiceProperties.class)  <span class="comment">// 1. 开启属性注入</span></span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(HelloService.class)   <span class="comment">// 2. 当HelloService在类路径下</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"hello"</span>,value = <span class="string">"enabled"</span>,matchIfMissing = <span class="keyword">true</span>)  <span class="comment">//3. 配置的前缀: hello 当设置hello=enabled的情况下，如果没有设置，则默认true，即条件符合</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServiceAutoConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HelloServiceProperties helloServiceProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>  <span class="comment">// 4. 使用Java config配置</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(HelloService.class)   <span class="comment">//判断HelloService这个类在类路径中是否存在，且当容器中没有这个Bean的情况下自动配置这个Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HelloService <span class="title">helloService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        HelloService helloService = <span class="keyword">new</span> HelloService();</span><br><span class="line">        helloService.setMsg(helloServiceProperties.getMsg());</span><br><span class="line">        <span class="keyword">return</span> helloService;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-注册配置"><a href="#6-注册配置" class="headerlink" title="6. 注册配置"></a>6. 注册配置</h3><ul>
+<li><p>若想配置生效，需要注册自动配置类。在<code>src/main/resources</code>下新建<code>META-INF/spring.factories,</code>，项目目录结构如下所示：</p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241913_970.png" alt=""></p>
+</li>
+<li><p><code>spring.factories</code>内容如下：</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.xzp.spring_boot_starter_hello.HelloServiceAutoConfiguration</span><br></pre></td></tr></table></figure>
+<h3 id="7-安装到本地库"><a href="#7-安装到本地库" class="headerlink" title="7. 安装到本地库"></a>7. 安装到本地库</h3><ul>
+<li>执行命令：<code>mvn install</code>安装到本地库，或者将这个jar包发布到Maven私服上</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tarter-hello-1.0-SNAPSHOT.pom</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 1.500 s</span><br><span class="line">[INFO] Finished at: 2018-07-24T19:16:56+08:00</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<h3 id="8-新建测试项目"><a href="#8-新建测试项目" class="headerlink" title="8. 新建测试项目"></a>8. 新建测试项目</h3><ul>
+<li>新建SpringBoot项目，本文示例为<code>ch6_5</code>项目，对应于书中的章节，</li>
+<li>新建测试的<code>Controller</code>，</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    HelloService helloService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helloService.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>目录结果如下：</li>
+</ul>
+<p><img src="C:\Users\Xbear\AppData\Local\Temp\1532431302199.png" alt="1532431302199"></p>
+<ul>
+<li>启动SpringBoot，此时application.properties中未添加任何内容,浏览器中输入 <code>localhost:8080</code>,结果如下：</li>
+</ul>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241924_515.png" alt=""></p>
+<ul>
+<li><p>上述结果表明默认的配置生效了，测试我们修改application.properties内容如下，再重新启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello.msg=xiongzp08</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>则运行结果如下：</p>
+</li>
+</ul>
+<p><img src="C:\Users\Xbear\AppData\Local\Temp\1532431610756.png" alt="1532431610756"></p>
+<ul>
+<li><p>可以看到相应的结果发生变化了</p>
+</li>
+<li><p>如果在application.properties中添加<code>debuge=true</code>，还可以在控制台看到我们的配置生效的结果</p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241930_197.png" alt=""></p>
+</li>
+</ul>
 <hr>
-<blockquote>
-<p>这是典型的并发问题，涉及线程同步，在Java总可以采用锁的机制实现，本文将例举<code>synchronize</code>与<code>volatile</code>的原子变量类来解决,</p>
-</blockquote>
-<blockquote>
-<p>每个方案都是详细的代码解释，完整代码可见文末链接</p>
-</blockquote>
-<h2 id="1-synchronize解决方案"><a href="#1-synchronize解决方案" class="headerlink" title="1. synchronize解决方案"></a>1. synchronize解决方案</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizeExample</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n  = <span class="number">10</span>;</span><br><span class="line">        Thread[] threads = <span class="keyword">new</span> Thread[n];<span class="comment">//10个窗口售卖，开10个进程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            threads[i] = <span class="keyword">new</span> Thread(<span class="keyword">new</span> ticket());</span><br><span class="line">            threads[i].setName(i+<span class="number">1</span>+<span class="string">"号窗口"</span>);</span><br><span class="line">            threads[i].start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ticket</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String key = <span class="string">"key"</span>; <span class="comment">//通过key这个互斥变量来控制对count的访问</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (key)&#123;</span><br><span class="line">                <span class="keyword">if</span> (count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"第"</span>+Thread.currentThread().getName()+<span class="string">"在卖第"</span>+(<span class="number">1001</span>-count)+<span class="string">"张票"</span>);</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    count--;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"第"</span>+Thread.currentThread().getName()+<span class="string">"的票已经卖完"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-volatile-AtomicInteger解决方案"><a href="#2-volatile-AtomicInteger解决方案" class="headerlink" title="2. volatile+AtomicInteger解决方案"></a>2. volatile+AtomicInteger解决方案</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 同样是买票问题 尝试使用原子类 + volatile 解决</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizeExample2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> windows = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; windows; i++) &#123;</span><br><span class="line">            Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Sale());</span><br><span class="line">            thread.setName(i+<span class="number">1</span>+<span class="string">"号窗口"</span>);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sale</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="comment">//保证count的自增操作的原子性，使用volatile保证共享变量的可见性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp =count.get();</span><br><span class="line">        <span class="keyword">while</span> (temp &lt;= <span class="number">1000</span>)&#123;</span><br><span class="line">            temp = count.getAndIncrement();</span><br><span class="line">            <span class="keyword">if</span> (temp &lt; <span class="number">1000</span>)&#123;</span><br><span class="line">                System.out.println(<span class="string">"第"</span>+Thread.currentThread().getName()+<span class="string">"在卖第"</span>+(temp+<span class="number">1</span>)+<span class="string">"张票"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"第"</span>+Thread.currentThread().getName()+<span class="string">"的票已经卖完"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
-<li><a href="https://github.com/briarbear/java_core/tree/master/src/main/java/concurrent/synchronize" target="_blank" rel="noopener">示例完整源码-github</a></li>
+<h2 id="3-相关连接"><a href="#3-相关连接" class="headerlink" title="3. 相关连接"></a>3. 相关连接</h2><ul>
+<li>本示例完整代码 <ul>
+<li><a href="https://gitee.com/briarbear/springboot_in_action_wyf/blob/master/springbootstarterhello" target="_blank" rel="noopener">码云</a></li>
+<li><a href="https://github.com/briarbear/springboot_in_action_wyf/blob/master/springbootstarterhello" target="_blank" rel="noopener">Github</a></li>
+</ul>
+</li>
 </ul>
 
       
@@ -279,11 +342,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Synchronize</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -295,7 +354,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -350,7 +409,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//img.fanhaobai.com/qrcode.php?url=https://briarbear.github.io/2018/07/04/Java并发-Synchronize与volatile应用示例（售票系统）/" alt="微信分享二维码">
+      <img src="//img.fanhaobai.com/qrcode.php?url=https://briarbear.github.io/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -364,18 +423,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/05/设计模式-Java中三种代理模式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          设计模式-Java中三种代理模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/07/04/Java并发-阻塞队列实现生产者消费者/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java并发-阻塞队列实现生产者消费者</div>
+    <a href="/2018/07/17/面试-计算机网络常见问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">面试-计算机网络常见问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -402,7 +452,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-synchronize解决方案"><span class="toc-number">1.</span> <span class="toc-text">1. synchronize解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-volatile-AtomicInteger解决方案"><span class="toc-number">2.</span> <span class="toc-text">2. volatile+AtomicInteger解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关链接"><span class="toc-number">3.</span> <span class="toc-text">相关链接</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SpringBoot实现原理"><span class="toc-number">1.</span> <span class="toc-text">1. SpringBoot实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实现步骤"><span class="toc-number">2.</span> <span class="toc-text">2. 实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-IDEA新建maven项目"><span class="toc-number">2.1.</span> <span class="toc-text">1. IDEA新建maven项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-修改pom-xml文件"><span class="toc-number">2.2.</span> <span class="toc-text">2. 修改pom.xml文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-新建配置属性类"><span class="toc-number">2.3.</span> <span class="toc-text">3. 新建配置属性类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-判断服务类"><span class="toc-number">2.4.</span> <span class="toc-text">4. 判断服务类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-自动配置类"><span class="toc-number">2.5.</span> <span class="toc-text">5. 自动配置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-注册配置"><span class="toc-number">2.6.</span> <span class="toc-text">6. 注册配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-安装到本地库"><span class="toc-number">2.7.</span> <span class="toc-text">7. 安装到本地库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-新建测试项目"><span class="toc-number">2.8.</span> <span class="toc-text">8. 新建测试项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-相关连接"><span class="toc-number">3.</span> <span class="toc-text">3. 相关连接</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -427,7 +477,7 @@
 <script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
 var gitment = new Gitment({
-  id: "Wed Jul 04 2018 15:14:56 GMT+0800",
+  id: "Tue Jul 24 2018 19:51:55 GMT+0800",
   owner: 'briarbear',
   repo: 'briarbear.github.io',
   oauth: {

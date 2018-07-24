@@ -174,6 +174,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SpringBoot核心原理-手写实现spring-boot-starter与自动配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/">SpringBoot核心原理-手写实现spring-boot-starter与自动配置</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/" class="archive-article-date">
+  	<time datetime="2018-07-24T11:51:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-24</time>
+</a>
+        
+      </header>
+    
+    
+      <!-- 目录内容 -->
+      
+      <!-- 目录内容结束 -->    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习</p>
+</blockquote>
+<h2 id="1-SpringBoot实现原理"><a href="#1-SpringBoot实现原理" class="headerlink" title="1. SpringBoot实现原理"></a>1. SpringBoot实现原理</h2><p>&nbsp;&nbsp;<code>Springboot</code>只所以能实现快速开发，其中最重要的特征就是<code>spring-boot-starter</code>与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了<code>Spring4.x+</code>对条件化配置的支持，合理地推测应用所需的<code>bean</code>并自动配置他们，这些则符合<code>springboot</code>的设计理念-<strong>习惯优于配置</strong>，从而大大减少繁多的配置，提高开发效率</p>
+        
+          <a class="article-more-a" href="/2018/07/24/SpringBoot核心原理-手写实现spring-boot-starter与自动配置/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-面试-计算机网络常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -199,7 +290,9 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>【转载】-<a href="https://mp.weixin.qq.com/s?__biz=MzIwMTY0NDU3Nw==&amp;mid=2651936192&amp;idx=1&amp;sn=65808d8b76c973f94ec32326a7138486&amp;chksm=8d0f3a8eba78b398e7afa6b436a941535caf73da780a59c99bf0192ed243570e7438be528545&amp;mpshare=1&amp;scene=1&amp;srcid=0717g28T23qThY2EyUoBr1ho#rd" target="_blank" rel="noopener">Java面试中常见的计算机网络方面问题</a>-（部分增加修改）</p>
+        <blockquote>
+<p>【转载】-<a href="https://mp.weixin.qq.com/s?__biz=MzIwMTY0NDU3Nw==&amp;mid=2651936192&amp;idx=1&amp;sn=65808d8b76c973f94ec32326a7138486&amp;chksm=8d0f3a8eba78b398e7afa6b436a941535caf73da780a59c99bf0192ed243570e7438be528545&amp;mpshare=1&amp;scene=1&amp;srcid=0717g28T23qThY2EyUoBr1ho#rd" target="_blank" rel="noopener">Java面试中常见的计算机网络方面问题</a>-（部分增加修改）</p>
+</blockquote>
 <h2 id="1-GET-和-POST-的区别"><a href="#1-GET-和-POST-的区别" class="headerlink" title="1. GET 和 POST 的区别"></a>1. GET 和 POST 的区别</h2><p><strong>GET方法</strong>（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;name2=value2</p>
 <ul>
 <li>GET 请求可被缓存<ul>
@@ -526,11 +619,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CyclicBarrier</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CyclicBarrier</a>
         		</li>
       		
 		</ul>
@@ -1052,106 +1145,9 @@
 
 
   
-    <article id="post-Java并发-阻塞队列实现生产者消费者" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/04/Java并发-阻塞队列实现生产者消费者/">Java并发-阻塞队列实现生产者消费者</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/04/Java并发-阻塞队列实现生产者消费者/" class="archive-article-date">
-  	<time datetime="2018-07-04T02:50:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        
-      </header>
-    
-    
-      <!-- 目录内容 -->
-      
-      <!-- 目录内容结束 -->    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-阻塞队列"><a href="#1-阻塞队列" class="headerlink" title="1. 阻塞队列"></a>1. 阻塞队列</h2><blockquote>
-<p>前文中讲到过：阻塞队列（<code>BlockingQueue</code>）是一个支持两个附加操作的队列。阻塞队列常用于生产者和消费者的场景，生产者是向队列中添加元素的线程，消费者是从队列取元素的线程。阻塞队列就是生产者用来存放元素，消费者用来获取元素的容器</p>
-</blockquote>
-<ul>
-<li>完整代码见文末</li>
-</ul>
-        
-          <a class="article-more-a" href="/2018/07/04/Java并发-阻塞队列实现生产者消费者/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">并发</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">阻塞队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
   
 
@@ -1242,10 +1238,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射</a>
               </li>
              
@@ -1254,11 +1246,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1266,7 +1258,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CyclicBarrier</a>
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1274,7 +1270,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+                <a href="javascript:void(0)" class="js-tag color4">CyclicBarrier</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1314,7 +1310,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1322,11 +1318,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
