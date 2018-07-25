@@ -856,6 +856,7 @@ body {
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
+	margin-bottom: 0.3em;
 	-webkit-box-orient: vertical
 }
 
@@ -884,7 +885,8 @@ body {
 
 .left-col #header .header-smart-menu {
 	font-size: 12px;
-	margin-bottom: 20px
+	/* margin-bottom: 20px */
+	margin-top: 0.4em
 }
 
 .left-col #header .header-smart-menu a:after {
@@ -1435,7 +1437,7 @@ pre .css~* .id,pre .id {
 }
 
 #header .header-nav .social a.github {
-	background: #afb6ca;
+	background: #000;
 	border: 1px solid #afb6ca
 }
 
