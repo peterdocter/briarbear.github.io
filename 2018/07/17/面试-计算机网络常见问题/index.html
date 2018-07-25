@@ -192,9 +192,12 @@
         
 
         
-          <span class="archive-article-date">
-            阅读量 <span id="busuanzi_value_page_pv"></span>
-          </span>
+          <a href="javascript:;" class="archive-article-date">
+              <i class="icon-smile icon"></i>
+              <span id="busuanzi_value_page_pv"></span>
+              
+          </a>
+
         
         
       </header>
@@ -572,19 +575,6 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-GET-和-POST-的区别"><span class="toc-number">1.</span> <span class="toc-text">1. GET 和 POST 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-DNS使用的协议"><span class="toc-number">2.</span> <span class="toc-text">2. DNS使用的协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-幂等"><span class="toc-number">3.</span> <span class="toc-text">3. 幂等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Cookies-和-session-区别"><span class="toc-number">4.</span> <span class="toc-text">3. Cookies 和 session 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TCP-粘包和拆包产生的原因"><span class="toc-number">5.</span> <span class="toc-text">4. TCP 粘包和拆包产生的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TCP-粘包和拆包的解决策略"><span class="toc-number">6.</span> <span class="toc-text">5. TCP 粘包和拆包的解决策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-三次握手"><span class="toc-number">7.</span> <span class="toc-text">6. 三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-四次挥手"><span class="toc-number">8.</span> <span class="toc-text">7. 四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-一次完整的-HTTP-请求过程"><span class="toc-number">9.</span> <span class="toc-text">8. 一次完整的 HTTP 请求过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-讲一下长连接"><span class="toc-number">10.</span> <span class="toc-text">9. 讲一下长连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-TCP-如何保证可靠传输？"><span class="toc-number">11.</span> <span class="toc-text">10. TCP 如何保证可靠传输？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-详细介绍-http"><span class="toc-number">12.</span> <span class="toc-text">11. 详细介绍 http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-URI-和-URL-的区别"><span class="toc-number">13.</span> <span class="toc-text">12. URI 和 URL 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-HTTPS-和-HTTP-的区别"><span class="toc-number">14.</span> <span class="toc-text">13. HTTPS 和 HTTP 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-HTTPS-是如何保证数据传输的安全"><span class="toc-number">15.</span> <span class="toc-text">14. HTTPS 是如何保证数据传输的安全</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
@@ -726,11 +716,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,7 +740,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">CountDownLatch</a>
+                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,7 +748,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
+                <a href="javascript:void(0)" class="js-tag color5">CountDownLatch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -782,6 +772,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">负载均衡</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
              
@@ -790,15 +784,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">负载均衡</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
