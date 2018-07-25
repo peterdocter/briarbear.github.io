@@ -19,11 +19,11 @@
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241814_743.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241820_966.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241913_970.png">
-<meta property="og:image" content="c:/Users/Xbear/AppData/Local/Temp/1532431302199.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807251917_722.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241924_515.png">
-<meta property="og:image" content="c:/Users/Xbear/AppData/Local/Temp/1532431610756.png">
+<meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807251916_569.png">
 <meta property="og:image" content="http://p7dzmubvx.bkt.clouddn.com/201807241930_197.png">
-<meta property="og:updated_time" content="2018-07-24T11:53:38.651Z">
+<meta property="og:updated_time" content="2018-07-25T11:18:09.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot核心原理-手写实现spring-boot-starter与自动配置">
 <meta name="twitter:description" content="主要内容摘自《Java EE的颠覆者 SpringBoot实战-汪云飞》，以下为学习笔记与实现代码，仅供交流学习  1. SpringBoot实现原理&amp;nbsp;&amp;nbsp;Springboot只所以能实现快速开发，其中最重要的特征就是spring-boot-starter与自动配置，前者将常用的依赖分组进行整合，将其合并到一个依赖中；后者则是利用了Spring4.x+对条件化配置的支持，合理地">
@@ -291,9 +291,9 @@
 <ul>
 <li>目录结果如下：</li>
 </ul>
-<p><img src="C:\Users\Xbear\AppData\Local\Temp\1532431302199.png" alt="1532431302199"></p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807251917_722.png" alt=""></p>
 <ul>
-<li>启动SpringBoot，此时application.properties中未添加任何内容,浏览器中输入 <code>localhost:8080</code>,结果如下：</li>
+<li>启动<code>SpringBoot</code>，此时<code>application.properties</code>中未添加任何内容,浏览器中输入 <code>localhost:8080</code>,结果如下：</li>
 </ul>
 <p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241924_515.png" alt=""></p>
 <ul>
@@ -303,11 +303,11 @@
 <li><p>则运行结果如下：</p>
 </li>
 </ul>
-<p><img src="C:\Users\Xbear\AppData\Local\Temp\1532431610756.png" alt="1532431610756"></p>
+<p><img src="http://p7dzmubvx.bkt.clouddn.com/201807251916_569.png" alt=""></p>
 <ul>
 <li><p>可以看到相应的结果发生变化了</p>
 </li>
-<li><p>如果在application.properties中添加<code>debuge=true</code>，还可以在控制台看到我们的配置生效的结果</p>
+<li><p>如果在<code>application.properties</code>中添加<code>debuge=true</code>，还可以在控制台看到我们的配置生效的结果</p>
 <p><img src="http://p7dzmubvx.bkt.clouddn.com/201807241930_197.png" alt=""></p>
 </li>
 </ul>
@@ -586,7 +586,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,23 +602,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,7 +610,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Semaphore</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Synchronize</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -638,11 +638,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Map</a>
+                <a href="javascript:void(0)" class="js-tag color4">Set</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Set</a>
+                <a href="javascript:void(0)" class="js-tag color4">Map</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,11 +662,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">负载均衡</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">负载均衡</a>
+                <a href="javascript:void(0)" class="js-tag color5">代理模式</a>
               </li>
              
               <li class="article-tag-list-item">
