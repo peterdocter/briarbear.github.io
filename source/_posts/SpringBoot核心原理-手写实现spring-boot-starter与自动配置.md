@@ -188,9 +188,9 @@ public class HelloController {
 
 - 目录结果如下：
 
-![1532431302199](C:\Users\Xbear\AppData\Local\Temp\1532431302199.png)
+![](http://p7dzmubvx.bkt.clouddn.com/201807251917_722.png)
 
-- 启动SpringBoot，此时application.properties中未添加任何内容,浏览器中输入 `localhost:8080`,结果如下：
+- 启动`SpringBoot`，此时`application.properties`中未添加任何内容,浏览器中输入 `localhost:8080`,结果如下：
 
 ![](http://p7dzmubvx.bkt.clouddn.com/201807241924_515.png)
 
@@ -202,11 +202,11 @@ public class HelloController {
 
 - 则运行结果如下：
 
-![1532431610756](C:\Users\Xbear\AppData\Local\Temp\1532431610756.png)
+![](http://p7dzmubvx.bkt.clouddn.com/201807251916_569.png)
 
 - 可以看到相应的结果发生变化了
 
-- 如果在application.properties中添加`debuge=true`，还可以在控制台看到我们的配置生效的结果
+- 如果在`application.properties`中添加`debuge=true`，还可以在控制台看到我们的配置生效的结果
 
   ![](http://p7dzmubvx.bkt.clouddn.com/201807241930_197.png)
 
