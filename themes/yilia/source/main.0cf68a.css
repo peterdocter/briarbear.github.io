@@ -1086,7 +1086,8 @@ body {
 /*行代码格式*/
 .article-entry .highlight .line {
 	font-family: Source Code Pro,Consolas,Monaco,Menlo,monospace;
-	color: #fff;
+	/*color: #fff;*/
+	color: rgb(220,220,220);
 	min-height: 19px
 
 }
