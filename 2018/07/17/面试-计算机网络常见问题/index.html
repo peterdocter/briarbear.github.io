@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="briarbear | 熊大">
 <meta property="og:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改）  1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-23T08:24:13.472Z">
+<meta property="og:updated_time" content="2018-07-31T07:41:51.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试-计算机网络常见问题">
 <meta name="twitter:description" content="【转载】-Java面试中常见的计算机网络方面问题-（部分增加修改）  1. GET 和 POST 的区别GET方法（GET）请注意，查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：/test/demo_form.asp?name1=value1&amp;amp;name2=value2  GET 请求可被缓存 GET 请求保留在浏览器历史记录中 GET 请求可被收藏为书签 GET 请求不">
@@ -314,12 +314,10 @@
 <li>客户端先发送 FIN，进入 FIN_WAIT1 状态</li>
 <li>服务端收到 FIN，发送 ACK，进入 CLOSE_WAIT 状态，客户端收到这个 ACK，进入 FIN_WAIT2 状态</li>
 <li>服务端发送 FIN，进入 LAST_ACK 状态</li>
-<li>客户端收到 FIN，发送 ACK，进入 TIME_WAIT 状态，服务端收到 ACK，进入 CLOSE 状态<br>TIME_WAIT 的状态就是主动断开的一方（这里是客户端），发送完最后一次 ACK 之后进入的状态。并且持续时间还挺长的。客户端 TIME_WAIT 持续 2 倍 MSL 时长，在 linux 体系中大概是 60s，转换成 CLOSE 状态<ul>
-<li><strong>TIME_WAIT</strong><br>TIME_WAIT 是主动关闭链接时形成的，等待 2MSL 时间，约 4 分钟。主要是防止最后一个 ACK 丢失。 由于 TIME_WAIT 的时间会非常长，因此 server 端应尽量减少主动关闭连接</li>
-</ul>
-</li>
+<li>客户端收到 FIN，发送 ACK，进入 TIME_WAIT 状态，服务端收到 ACK，进入 CLOSE 状态TIME_WAIT 的状态就是主动断开的一方（这里是客户端），发送完最后一次 ACK 之后进入的状态。并且持续时间还挺长的。客户端 TIME_WAIT 持续 2 倍 MSL 时长，在 linux 体系中大概是 60s，转换成 CLOSE 状态</li>
 </ol>
 <ul>
+<li><strong>TIME_WAIT</strong><br>TIME_WAIT 是主动关闭链接时形成的，等待 2MSL 时间，约 4 分钟。主要是防止最后一个 ACK 丢失。 由于 TIME_WAIT 的时间会非常长，因此 server 端应尽量减少主动关闭连接</li>
 <li><strong>CLOSE_WAIT</strong><br>CLOSE_WAIT 是被动关闭连接是形成的。根据 TCP 状态机，服务器端收到客户端发送的 FIN，则按照 TCP 实现发送 ACK，因此进入 CLOSE_WAIT 状态。但如果服务器端不执行 close()，就不能由 CLOSE_WAIT 迁移到 LAST_ACK，则系统中会存在很多 CLOSE_WAIT 状态的连接。此时，可能是系统忙于处理读、写操作，而未将已收到 FIN 的连接，进行 close。此时，recv/read 已收到 FIN 的连接 socket，会返回 0。</li>
 <li><strong>为什么需要 TIME_WAIT 状态？</strong><br>假设最终的 ACK 丢失，server 将重发 FIN，client 必须维护 TCP 状态信息以便可以重发最终的 ACK，否则会发送 RST，结果 server 认为发生错误。TCP 实现必须可靠地终止连接的两个方向 (全双工关闭)，client 必须进入 TIME_WAIT 状态，因为 client 可能面 临重发最终 ACK 的情形。</li>
 <li><strong>为什么 TIME_WAIT 状态需要保持 2MSL 这么长的时间？</strong><br>如果 TIME_WAIT 状态保持时间不足够长 (比如小于 2MSL)，第一个连接就正常终止了。第二个拥有相同相关五元组的连接出现，而第一个连接的重复报文到达，干扰了第二个连接。TCP 实现必须防止某个连接的重复报文在连接终止后出现，所以让 TIME_WAIT 状态保持时间足够长 (2MSL)，连接相应方向上的 TCP 报文要么完全响应完毕，要么被 丢弃。建立第二个连接的时候，不会混淆。</li>
@@ -705,11 +703,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">并发</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,7 +715,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+                <a href="javascript:void(0)" class="js-tag color3">并发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">阻塞队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,10 +728,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Semaphore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,15 +743,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">List</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Set</a>
+                <a href="javascript:void(0)" class="js-tag color1">Queue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Semaphore</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -765,7 +759,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
+                <a href="javascript:void(0)" class="js-tag color4">Set</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -773,11 +767,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">AOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
+                <a href="javascript:void(0)" class="js-tag color4">IOC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -789,11 +787,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">工厂模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
             
             <div class="clearfix"></div>
